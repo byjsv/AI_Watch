@@ -1602,8 +1602,8 @@ void OLED_DisplayBuffMoveArea(uint8_t PosX, uint8_t PosY, uint8_t EndX, uint8_t 
     uint8_t X;
 
     // 计算矩形区域的宽度和高度
-    uint8_t width = EndX - PosX + 1;
-    uint8_t high = EndY - PosY + 1;
+    //uint8_t width = EndX - PosX + 1;
+    //uint8_t high = EndY - PosY + 1;
 
     // 计算矩形区域的起始和结束字节
     uint8_t start_byte = PosY / 8;

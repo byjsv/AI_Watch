@@ -365,7 +365,7 @@
               <MiscControls>--no-multibyte-chars</MiscControls>
               <Define>USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\menu</IncludePath>
+              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\menu;.\MPU6050;.\AIR780E</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -867,6 +867,41 @@
               <FileName>Parising_menu.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\menu\Parising_menu.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>MPU6050</GroupName>
+          <Files>
+            <File>
+              <FileName>MPU6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\MPU6050.c</FilePath>
+            </File>
+            <File>
+              <FileName>MPU6050.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MPU6050\MPU6050.h</FilePath>
+            </File>
+            <File>
+              <FileName>MPU6050_Reg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MPU6050\MPU6050_Reg.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>AIR780E</GroupName>
+          <Files>
+            <File>
+              <FileName>Air780E.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\AIR780E\Air780E.c</FilePath>
+            </File>
+            <File>
+              <FileName>Air780E.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\AIR780E\Air780E.h</FilePath>
             </File>
           </Files>
         </Group>
