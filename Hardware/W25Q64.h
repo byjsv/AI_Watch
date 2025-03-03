@@ -1,0 +1,11 @@
+#ifndef __W25Q64_H
+#define __W25Q64_H
+
+void W25Q64_Init(void);     //  ³õÊ¼»¯
+void W25Q64_ReadID(uint8_t *MID, uint16_t *DID);		//  ¶ÁID
+void W25Q64_PageProgram(uint32_t Address, uint8_t *DataArray, uint16_t count);		//		Ò³±àÐ´
+void W25Q64_SectorErase(uint32_t Address);		//  Ò³²Á³ý
+void W25Q64_ReadData(uint32_t Address, uint8_t *DataArray, uint32_t count);		//  ¶ÁÊý¾Ý
+
+
+#endif
