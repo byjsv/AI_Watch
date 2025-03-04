@@ -36,3 +36,4 @@
 .\objects\dial.o: .\Hardware\Key.h
 .\objects\dial.o: .\System\MyRTC.h
 .\objects\dial.o: .\Hardware\Encoder.h
+.\objects\dial.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

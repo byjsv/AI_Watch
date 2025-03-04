@@ -8,6 +8,8 @@
 #include "MyRTC.h"
 #include "Encoder.h"
 #include "Key.h"
+#include "AIR780E.h"
+#include "Serial.h"
 
 							//定义要读取数据的测试数组
 
@@ -97,6 +99,30 @@ void test_Dial_RunPlate()
 	Dial_RunPlate();
 }
 
+void test_AIR780E()
+{
+	OLED_Init();
+	delay_init(72);
+	Serial_Init();
+	
+	uint8_t i=0;
+	
+	OLED_Update();
+	
+	while(1)
+	{
+		if(AT_SendCommand("AT\r\n","OK\r\n",100,1))
+		{
+			OLED_ShowString_Line(0,0,Serial_RxPacket,OLED_6X8);
+		}
+		OLED_ShowNum(0,47,i,3,OLED_8X16);
+		i++;
+		delay_ms(1000);
+		OLED_Update();
+	}
+	
+}
+
 
 void test_OLED(void)
 {
@@ -137,10 +163,12 @@ void usart()
 
 int main()
 {
+	//test_AIR780E();
 	OLED_Init();
-	//testTemprature();
-	//test_Dial_RunPlate();
-	OLED_ShowString_Line(0,0,"你好你好你好你好\nhello\nhhh",OLED_8X16);
+	
+	//Dial_ShowText(16,0,64,32,"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",OLED_8X16);
+	//OLED_ShowString_Line(16,16,"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",OLED_8X16);
+	test_AIR780E();
 	OLED_Update();
 }
 

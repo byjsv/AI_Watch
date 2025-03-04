@@ -7,6 +7,8 @@
 #include "MyRTC.h"
 #include "Encoder.h"
 
+#include "string.h"
+
 
 int8_t Dial_RollEvent()
 {
@@ -50,6 +52,112 @@ void Show_large_num(uint8_t X,uint8_t Y,uint8_t n)
 }
 
 /****************控件函数********************/
+
+void Dial_ShowText(int16_t X, int16_t Y,int16_t MaxX, int16_t MaxY, char *String, uint8_t FontSize)		//字符集为GB2312
+{
+	uint16_t i = 0;
+	char SingleChar[5];
+	uint8_t CharLength = 0;
+	uint16_t XOffset = 0;
+	uint16_t pIndex;
+	
+	while (String[i] != '\0')	//遍历字符串
+	{		
+
+		/*此段代码的目的是，提取GB2312字符串中的一个字符，转存到SingleChar子字符串中*/
+		/*判断GB2312字节的最高位标志位*/
+		if ((String[i] & 0x80) == 0x00)			//最高位为0
+		{
+			CharLength = 1;						//字符为1字节
+			SingleChar[0] = String[i ++];		//将第一个字节写入SingleChar第0个位置，随后i指向下一个字节
+			SingleChar[1] = '\0';				//为SingleChar添加字符串结束标志位
+		}
+		else									//最高位为1
+		{
+			CharLength = 2;						//字符为2字节
+			SingleChar[0] = String[i ++];		//将第一个字节写入SingleChar第0个位置，随后i指向下一个字节
+			if (String[i] == '\0') {break;}		//意外情况，跳出循环，结束显示
+			SingleChar[1] = String[i ++];		//将第二个字节写入SingleChar第1个位置，随后i指向下一个字节
+			SingleChar[2] = '\0';				//为SingleChar添加字符串结束标志位
+		}
+		if(XOffset+FontSize > MaxX && !(CharLength == 1 && SingleChar[0]=='\n'))         //    缺字显示
+		{
+			XOffset = 0;
+			Y += (FontSize==OLED_6X8)?8:16;
+			if(Y>MaxY)return;
+		}
+		
+		/*显示上述代码提取到的SingleChar*/
+		if (CharLength == 1)	//如果是单字节字符
+		{
+			if(SingleChar[0]=='\n')         //   解析到\n换行操作
+			{
+				XOffset = 0;
+				Y += (FontSize==OLED_6X8)?8:16;
+				if(Y>MaxY)return;
+			}
+			else
+			{
+				/*使用OLED_ShowChar显示此字符*/
+				OLED_ShowChar(X + XOffset, Y, SingleChar[0], FontSize);
+				XOffset += FontSize;
+			}
+		}
+		else					//否则，即多字节字符
+		{
+			/*遍历整个字模库，从字模库中寻找此字符的数据*/
+			/*如果找到最后一个字符（定义为空字符串），则表示字符未在字模库定义，停止寻找*/
+			for (pIndex = 0; strcmp(OLED_CF16x16[pIndex].Index, "") != 0; pIndex ++)
+			{
+				/*找到匹配的字符*/
+				if (strcmp(OLED_CF16x16[pIndex].Index, SingleChar) == 0)
+				{
+					break;		//跳出循环，此时pIndex的值为指定字符的索引
+				}
+			}
+			if (FontSize == OLED_8X16)		//给定字体为8*16点阵
+			{
+				/*将字模库OLED_CF16x16的指定数据以16*16的图像格式显示*/
+				OLED_ShowImage(X + XOffset, Y, 16, 16, OLED_CF16x16[pIndex].Data);
+				XOffset += 16;
+			}
+			else if (FontSize == OLED_6X8)	//给定字体为6*8点阵
+			{
+				/*空间不足，此位置显示'?'*/
+				OLED_ShowChar(X + XOffset, Y, '?', OLED_6X8);
+				XOffset += OLED_6X8;
+			}
+		}
+	}
+}
+
+void Dial_ShowText_contral()
+{
+	uint8_t Roll_Event;
+	
+	while(1)
+	{
+		Roll_Event = Dial_RollEvent();
+		if(Roll_Event)
+		{
+			Roll_Event = Dial_RollEvent();
+		
+		}
+		if(Roll_Event)
+		{
+			
+			
+			//select += Roll_Event;
+			
+			
+			OLED_Clear();
+		}
+		else
+		{
+			
+		}
+	}
+}
 
 void Dial_ShowDate(uint8_t PosX,uint8_t PosY,uint16_t year,uint8_t month,uint8_t day,uint8_t FontSize)
 {

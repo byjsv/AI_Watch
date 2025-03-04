@@ -38,3 +38,6 @@
 .\objects\main.o: .\System\MyRTC.h
 .\objects\main.o: .\Hardware\Encoder.h
 .\objects\main.o: .\Hardware\Key.h
+.\objects\main.o: .\AIR780E\AIR780E.h
+.\objects\main.o: .\System\Serial.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

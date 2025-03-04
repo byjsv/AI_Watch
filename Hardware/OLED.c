@@ -1851,7 +1851,7 @@ void OLED_ShowString_Line(int16_t X, int16_t Y, char *String, uint8_t FontSize)
 #endif
 		if(XOffset+FontSize > 127 && !(CharLength == 1 && SingleChar[0]=='\n'))         //    缺字显示
 		{
-			XOffset = X;
+			XOffset = 0;
 			Y += (FontSize==OLED_6X8)?8:16;
 		}
 		
@@ -1860,7 +1860,7 @@ void OLED_ShowString_Line(int16_t X, int16_t Y, char *String, uint8_t FontSize)
 		{
 			if(SingleChar[0]=='\n')         //   解析到\n换行操作
 			{
-				XOffset = X;
+				XOffset = 0;
 				Y += (FontSize==OLED_6X8)?8:16;
 			}
 			else

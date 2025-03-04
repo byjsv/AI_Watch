@@ -105,7 +105,7 @@ void Serial_Printf(char *format, ...)
 
 void USART1_IRQHandler(void)
 {
-	static uint8_t RxState = 0;
+	static uint8_t RxState = 1;
 	static uint8_t pRxPacket = 0;
 	if (USART_GetITStatus(USART1, USART_IT_RXNE) == SET)
 	{
@@ -135,7 +135,7 @@ void USART1_IRQHandler(void)
 		{
 			if (RxData == '\n')
 			{
-				RxState = 0;
+				RxState = 1;
 				Serial_RxPacket[pRxPacket] = '\0';
 				Serial_RxFlag = 1;
 			}
