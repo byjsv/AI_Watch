@@ -2,7 +2,7 @@
 #define __MAX30102_H
 #include "stm32f10x.h"
 #include "stdbool.h"
-#include "sys.h"
+//#include "sys.h"
 
 /*****************辰哥单片机设计******************
 											STM32
@@ -90,8 +90,8 @@ void MAX30102_IIC_Init(void);                //初始化IIC的IO口
 void MAX30102_IIC_Start(void);				//发送IIC开始信号
 void MAX30102_IIC_Stop(void);	  			//发送IIC停止信号
 void MAX30102_IIC_Send_Byte(u8 txd);			//IIC发送一个字节
-u8 MAX30102_IIC_Read_Byte(unsigned char ack);//IIC读取一个字节
-u8 MAX30102_IIC_Wait_Ack(void); 				//IIC等待ACK信号
+uint8_t MAX30102_IIC_Read_Byte(unsigned char ack);//IIC读取一个字节
+uint8_t MAX30102_IIC_Wait_Ack(void); 				//IIC等待ACK信号
 void MAX30102_IIC_Ack(void);					//IIC发送ACK信号
 void MAX30102_IIC_NAck(void);				//IIC不发送ACK信号
 
@@ -104,8 +104,8 @@ void MAX30102_IIC_ReadBytes(u8 deviceAddr, u8 writeAddr,u8* data,u8 dataLength);
 //MAX30102所有操作函数
 void MAX30102_Init(void);  
 void MAX30102_Reset(void);
-u8 M30102_Bus_Write(u8 Register_Address, u8 Word_Data);
-u8 max30102_Bus_Read(u8 Register_Address);
+uint8_t M30102_Bus_Write(u8 Register_Address, u8 Word_Data);
+uint8_t max30102_Bus_Read(u8 Register_Address);
 void max30102_FIFO_ReadWords(u8 Register_Address,u16  Word_Data[][2],u8 count);
 void max30102_FIFO_ReadBytes(u8 Register_Address,u8* Data);
 

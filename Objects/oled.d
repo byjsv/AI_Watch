@@ -34,4 +34,3 @@
 .\objects\oled.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\oled.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\oled.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
-.\objects\oled.o: .\Hardware\W25Q64.h

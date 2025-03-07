@@ -50,7 +50,7 @@
           <OutputName>Project</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>1</CreateHexFile>
+          <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
@@ -362,10 +362,10 @@
             <uC99>1</uC99>
             <useXO>0</useXO>
             <VariousControls>
-              <MiscControls>--no-multibyte-chars</MiscControls>
+              <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\menu;.\MPU6050;.\AIR780E</IncludePath>
+              <IncludePath>.\Start;.\User;.\Library;.\FreeRTOS;.\FreeRTOS\inc;.\FreeRTOS\port;.\FreeRTOS\src;.\System;.\Hardware;.\menu;.\MPU6050;.\AIR780E</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -406,8 +406,178 @@
       </TargetOption>
       <Groups>
         <Group>
+          <GroupName>FreeRTOS/inc</GroupName>
+          <Files>
+            <File>
+              <FileName>atomic.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\atomic.h</FilePath>
+            </File>
+            <File>
+              <FileName>croutine.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\croutine.h</FilePath>
+            </File>
+            <File>
+              <FileName>deprecated_definitions.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\deprecated_definitions.h</FilePath>
+            </File>
+            <File>
+              <FileName>event_groups.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\event_groups.h</FilePath>
+            </File>
+            <File>
+              <FileName>FreeRTOS.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\FreeRTOS.h</FilePath>
+            </File>
+            <File>
+              <FileName>list.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\list.h</FilePath>
+            </File>
+            <File>
+              <FileName>message_buffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\message_buffer.h</FilePath>
+            </File>
+            <File>
+              <FileName>mpu_prototypes.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\mpu_prototypes.h</FilePath>
+            </File>
+            <File>
+              <FileName>mpu_wrappers.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\mpu_wrappers.h</FilePath>
+            </File>
+            <File>
+              <FileName>portable.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\portable.h</FilePath>
+            </File>
+            <File>
+              <FileName>projdefs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\projdefs.h</FilePath>
+            </File>
+            <File>
+              <FileName>queue.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\queue.h</FilePath>
+            </File>
+            <File>
+              <FileName>semphr.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\semphr.h</FilePath>
+            </File>
+            <File>
+              <FileName>stack_macros.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\stack_macros.h</FilePath>
+            </File>
+            <File>
+              <FileName>StackMacros.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\StackMacros.h</FilePath>
+            </File>
+            <File>
+              <FileName>stream_buffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\stream_buffer.h</FilePath>
+            </File>
+            <File>
+              <FileName>task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\task.h</FilePath>
+            </File>
+            <File>
+              <FileName>timers.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\inc\timers.h</FilePath>
+            </File>
+            <File>
+              <FileName>FreeRTOSConfig.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\FreeRTOSConfig.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FreeRTOS/port</GroupName>
+          <Files>
+            <File>
+              <FileName>heap_4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\port\heap_4.c</FilePath>
+            </File>
+            <File>
+              <FileName>port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\port\port.c</FilePath>
+            </File>
+            <File>
+              <FileName>portmacro.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\port\portmacro.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FreeRTOS/src</GroupName>
+          <Files>
+            <File>
+              <FileName>croutine.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\src\croutine.c</FilePath>
+            </File>
+            <File>
+              <FileName>event_groups.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\src\event_groups.c</FilePath>
+            </File>
+            <File>
+              <FileName>list.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\src\list.c</FilePath>
+            </File>
+            <File>
+              <FileName>queue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\src\queue.c</FilePath>
+            </File>
+            <File>
+              <FileName>stream_buffer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\src\stream_buffer.c</FilePath>
+            </File>
+            <File>
+              <FileName>tasks.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\src\tasks.c</FilePath>
+            </File>
+            <File>
+              <FileName>timers.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\src\timers.c</FilePath>
+            </File>
+            <File>
+              <FileName>FreeRTOSConfig.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\FreeRTOS\FreeRTOSConfig.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Start</GroupName>
           <Files>
+            <File>
+              <FileName>startup_stm32f10x_md.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Start\startup_stm32f10x_md.s</FilePath>
+            </File>
             <File>
               <FileName>core_cm3.c</FileName>
               <FileType>1</FileType>
@@ -417,11 +587,6 @@
               <FileName>core_cm3.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Start\core_cm3.h</FilePath>
-            </File>
-            <File>
-              <FileName>startup_stm32f10x_md.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\Start\startup_stm32f10x_md.s</FilePath>
             </File>
             <File>
               <FileName>stm32f10x.h</FileName>
@@ -441,7 +606,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Libray</GroupName>
+          <GroupName>Library</GroupName>
           <Files>
             <File>
               <FileName>misc.c</FileName>
@@ -679,24 +844,24 @@
           <GroupName>User</GroupName>
           <Files>
             <File>
-              <FileName>stm32f10x_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\User\stm32f10x_conf.h</FilePath>
-            </File>
-            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\main.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f10x_it.h</FileName>
+              <FileName>stm32f10x_conf.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\User\stm32f10x_it.h</FilePath>
+              <FilePath>.\User\stm32f10x_conf.h</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\stm32f10x_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_it.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\User\stm32f10x_it.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -704,34 +869,14 @@
           <GroupName>System</GroupName>
           <Files>
             <File>
-              <FileName>delay.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\System\delay.h</FilePath>
-            </File>
-            <File>
-              <FileName>delay.c</FileName>
+              <FileName>Delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\System\delay.c</FilePath>
+              <FilePath>.\System\Delay.c</FilePath>
             </File>
             <File>
-              <FileName>sys.h</FileName>
+              <FileName>Delay.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\System\sys.h</FilePath>
-            </File>
-            <File>
-              <FileName>sys.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\System\sys.c</FilePath>
-            </File>
-            <File>
-              <FileName>Serial.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\System\Serial.c</FilePath>
-            </File>
-            <File>
-              <FileName>Serial.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\System\Serial.h</FilePath>
+              <FilePath>.\System\Delay.h</FilePath>
             </File>
             <File>
               <FileName>MyRTC.c</FileName>
@@ -742,6 +887,16 @@
               <FileName>MyRTC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\System\MyRTC.h</FilePath>
+            </File>
+            <File>
+              <FileName>Serial.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\System\Serial.c</FilePath>
+            </File>
+            <File>
+              <FileName>Serial.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\System\Serial.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -767,26 +922,6 @@
               <FileName>Key.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\Key.h</FilePath>
-            </File>
-            <File>
-              <FileName>ds18b20.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\ds18b20.h</FilePath>
-            </File>
-            <File>
-              <FileName>ds18b20.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\ds18b20.c</FilePath>
-            </File>
-            <File>
-              <FileName>max30102.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\max30102.h</FilePath>
-            </File>
-            <File>
-              <FileName>max30102.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\max30102.c</FilePath>
             </File>
             <File>
               <FileName>OLED.c</FileName>
@@ -834,14 +969,14 @@
               <FilePath>.\Hardware\W25Q64_Ins.h</FilePath>
             </File>
             <File>
-              <FileName>Read_Font.c</FileName>
+              <FileName>ds18b20.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Hardware\Read_Font.c</FilePath>
+              <FilePath>.\Hardware\ds18b20.c</FilePath>
             </File>
             <File>
-              <FileName>Read_Font.h</FileName>
+              <FileName>ds18b20.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Hardware\Read_Font.h</FilePath>
+              <FilePath>.\Hardware\ds18b20.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -859,14 +994,24 @@
               <FilePath>.\menu\Dial.h</FilePath>
             </File>
             <File>
-              <FileName>Parsing_menu.c</FileName>
+              <FileName>Menu_Show.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\menu\Parsing_menu.c</FilePath>
+              <FilePath>.\menu\Menu_Show.c</FilePath>
+            </File>
+            <File>
+              <FileName>Menu_Show.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\menu\Menu_Show.h</FilePath>
             </File>
             <File>
               <FileName>Parising_menu.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\menu\Parising_menu.h</FilePath>
+            </File>
+            <File>
+              <FileName>Parsing_menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\menu\Parsing_menu.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -891,17 +1036,17 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>AIR780E</GroupName>
+          <GroupName>Air780E</GroupName>
           <Files>
-            <File>
-              <FileName>Air780E.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\AIR780E\Air780E.c</FilePath>
-            </File>
             <File>
               <FileName>Air780E.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\AIR780E\Air780E.h</FilePath>
+            </File>
+            <File>
+              <FileName>Air780E.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\AIR780E\Air780E.c</FilePath>
             </File>
           </Files>
         </Group>

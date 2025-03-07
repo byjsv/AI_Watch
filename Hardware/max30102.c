@@ -1,5 +1,5 @@
 #include "max30102.h"
-#include "delay.h"
+#include "Delay.h"
 
 /*****************辰哥单片机设计******************
 											STM32
@@ -409,9 +409,9 @@ void MAX30102_IIC_Start(void)
 	MAX30102_IIC_SDA_OUT();     //sda线输出
 	MAX30102_IIC_SDA=1;	  	  
 	MAX30102_IIC_SCL=1;
-	delay_us(4);
+	Delay_us(4);
  	MAX30102_IIC_SDA=0;//START:when CLK is high,DATA change form high to low 
-	delay_us(4);
+	Delay_us(4);
 	MAX30102_IIC_SCL=0;//钳住I2C总线，准备发送或接收数据 
 }	  
 //产生IIC停止信号

@@ -24,7 +24,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdarg.h>
-#include <W25Q64.h>
+//#include <W25Q64.h>
 
 /**
   * 数据存储格式：
@@ -744,55 +744,6 @@ void OLED_ShowString(int16_t X, int16_t Y, char *String, uint8_t FontSize)
 			}
 		}
 	}
-}
-
-/**
-  * 函    数：从W25qxx读取并显示字符串
-  * 参    数：X 指定字符串左上角的横坐标，范围：0~127
-  * 参    数：Y 指定字符串左上角的纵坐标，范围：0~63
-  * 参    数：String 指定要显示的字符串
-  * 参    数：FontSize 指定字体大小
-  *           范围：OLED_8X16		宽8像素，高16像素
-  *                 OLED_6X8		宽6像素，高8像素
-  * 返 回 值：无
-  * 说    明：调用此函数后，要想真正地呈现在屏幕上，还需调用更新函数
-  */
-void OLED_String_W25Q(int8_t X, int8_t Y, char *String)	//中英文打印;
-{
-	uint8_t i, len;
-	uint8_t SChinese[24];	
-	uint8_t GB_L,GB_H;
-	uint32_t Addr_offset;//汉字的偏移地址
-	for (i = 0, len = 0; String[i] != '\0'; i++, len++)		//遍历字符串的每个字符
-	{
-		if(String[i] == '\n'){Y += (OLED_6X8 == 8)?16:8; len = 255; continue;}			//兼容换行符
-		if(X + (len+1) * OLED_6X8 > 128){Y += (OLED_6X8 == 8)?16:8; len = 0;}
-		
-		if(String[i] > '~')				//如果不属于英文字符
-		{
-			
-			GB_H = String[i];          //计算偏移
-			
-			i++;
-			GB_L = String[i];;
-
-			GB_H -= 0xA1;
-
-			GB_L -= 0xA1;
-			
-			Addr_offset = ((94*GB_H + GB_L)-1410) * 24;   //1410是bg字库缺少了前面的1410个英文所做的修正补偿，24是单个字模大小
-
-			W25Q64_ReadData( Addr_offset , SChinese , 24 );			
-			OLED_ShowImage(X + len * OLED_6X8, Y, 12, 12, SChinese);
-			
-			len += 1; 
-		}
-		else
-		{
-			/*调用OLED_ShowChar函数，依次显示每个字符*/
-			OLED_ShowChar(X + len * OLED_6X8, Y + 4, String[i], OLED_6X8);
-		}
-	 }                  //这里加4是为了让汉字与字母底部在同一水平线
 }
 
 
@@ -1862,6 +1813,10 @@ void OLED_ShowString_Line(int16_t X, int16_t Y, char *String, uint8_t FontSize)
 			{
 				XOffset = 0;
 				Y += (FontSize==OLED_6X8)?8:16;
+			}
+			else if(SingleChar[0]=='\r')
+			{
+				
 			}
 			else
 			{

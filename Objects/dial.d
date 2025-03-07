@@ -32,7 +32,6 @@
 .\objects\dial.o: .\Hardware\OLED.h
 .\objects\dial.o: .\Hardware\OLED_Data.h
 .\objects\dial.o: .\Hardware\ds18b20.h
-.\objects\dial.o: .\System\sys.h
 .\objects\dial.o: .\Hardware\Key.h
 .\objects\dial.o: .\System\MyRTC.h
 .\objects\dial.o: .\Hardware\Encoder.h

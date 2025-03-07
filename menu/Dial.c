@@ -9,6 +9,13 @@
 
 #include "string.h"
 
+struct Plate_class{
+	char *Plate_Name;		// 选项名字
+	void (*func)(void);     // 显示函数指针
+	void (*func_Exit)(void);          //  退出函数
+};
+
+
 
 int8_t Dial_RollEvent()
 {
@@ -261,11 +268,6 @@ void Health_Plate_Exit()
 
 /*********************主界面选项**********************/
 
-struct Plate_class{
-	char *Plate_Name;		// 选项名字
-	void (*func)(void);     // 显示函数指针
-	void (*func_Exit)(void);          //  退出函数
-};
 
 void Plate_ShowName(char *Name,uint8_t Y)
 {

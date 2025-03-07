@@ -1,52 +1,41 @@
-#include "delay.h"
-#include "misc.h"
+#include "stm32f10x.h"
 
-static u8  fac_us=0;//usÑÓÊ±±¶³ËÊý
-static u16 fac_ms=0;//msÑÓÊ±±¶³ËÊý
-//³õÊ¼»¯ÑÓ³Ùº¯Êý
-//SYSTICKµÄÊ±ÖÓ¹Ì¶¨ÎªHCLKÊ±ÖÓµÄ1/8
-//SYSCLK:ÏµÍ³Ê±ÖÓ
-void delay_init(u8 SYSCLK)
+/**
+  * @brief  å¾®ç§’çº§å»¶æ—¶
+  * @param  xus å»¶æ—¶æ—¶é•¿ï¼ŒèŒƒå›´ï¼š0~233015
+  * @retval æ— 
+  */
+void Delay_us(uint32_t xus)
 {
-//	SysTick->CTRL&=0xfffffffb;//bit2Çå¿Õ,Ñ¡ÔñÍâ²¿Ê±ÖÓ  HCLK/8
-	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);	//Ñ¡ÔñÍâ²¿Ê±ÖÓ  HCLK/8
-	fac_us=SYSCLK/8;		    
-	fac_ms=(u16)fac_us*1000;
-}								    
-//ÑÓÊ±nms
-//×¢ÒânmsµÄ·¶Î§
-//SysTick->LOADÎª24Î»¼Ä´æÆ÷,ËùÒÔ,×î´óÑÓÊ±Îª:
-//nms<=0xffffff*8*1000/SYSCLK
-//SYSCLKµ¥Î»ÎªHz,nmsµ¥Î»Îªms
-//¶Ô72MÌõ¼þÏÂ,nms<=1864 
-void delay_ms(u16 nms)
-{	 		  	  
-	u32 temp;		   
-	SysTick->LOAD=(u32)nms*fac_ms;//Ê±¼ä¼ÓÔØ(SysTick->LOADÎª24bit)
-	SysTick->VAL =0x00;           //Çå¿Õ¼ÆÊýÆ÷
-	SysTick->CTRL=0x01 ;          //¿ªÊ¼µ¹Êý  
-	do
-	{
-		temp=SysTick->CTRL;
-	}
-	while(temp&0x01&&!(temp&(1<<16)));//µÈ´ýÊ±¼äµ½´ï   
-	SysTick->CTRL=0x00;       //¹Ø±Õ¼ÆÊýÆ÷
-	SysTick->VAL =0X00;       //Çå¿Õ¼ÆÊýÆ÷	  	    
-}   
-//ÑÓÊ±nus
-//nusÎªÒªÑÓÊ±µÄusÊý.		    								   
-void delay_us(u32 nus)
-{		
-	u32 temp;	    	 
-	SysTick->LOAD=nus*fac_us; //Ê±¼ä¼ÓÔØ	  		 
-	SysTick->VAL=0x00;        //Çå¿Õ¼ÆÊýÆ÷
-	SysTick->CTRL=0x01 ;      //¿ªÊ¼µ¹Êý 	 
-	do
-	{
-		temp=SysTick->CTRL;
-	}
-	while(temp&0x01&&!(temp&(1<<16)));//µÈ´ýÊ±¼äµ½´ï   
-	SysTick->CTRL=0x00;       //¹Ø±Õ¼ÆÊýÆ÷
-	SysTick->VAL =0X00;       //Çå¿Õ¼ÆÊýÆ÷	 
+	SysTick->LOAD = 72 * xus;				//è®¾ç½®å®šæ—¶å™¨é‡è£…å€¼
+	SysTick->VAL = 0x00;					//æ¸…ç©ºå½“å‰è®¡æ•°å€¼
+	SysTick->CTRL = 0x00000005;				//è®¾ç½®æ—¶é’Ÿæºä¸ºHCLKï¼Œå¯åŠ¨å®šæ—¶å™¨
+	while(!(SysTick->CTRL & 0x00010000));	//ç­‰å¾…è®¡æ•°åˆ°0
+	SysTick->CTRL = 0x00000004;				//å…³é—­å®šæ—¶å™¨
 }
 
+/**
+  * @brief  æ¯«ç§’çº§å»¶æ—¶
+  * @param  xms å»¶æ—¶æ—¶é•¿ï¼ŒèŒƒå›´ï¼š0~4294967295
+  * @retval æ— 
+  */
+void Delay_ms(uint32_t xms)
+{
+	while(xms--)
+	{
+		Delay_us(1000);
+	}
+}
+ 
+/**
+  * @brief  ç§’çº§å»¶æ—¶
+  * @param  xs å»¶æ—¶æ—¶é•¿ï¼ŒèŒƒå›´ï¼š0~4294967295
+  * @retval æ— 
+  */
+void Delay_s(uint32_t xs)
+{
+	while(xs--)
+	{
+		Delay_ms(1000);
+	}
+} 

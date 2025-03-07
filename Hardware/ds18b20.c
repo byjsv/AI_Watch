@@ -18,28 +18,28 @@ void DS18B20_Rst(void)
 {                 
 		DS18B20_Mode(OUT); 	//SET OUTPUT
     DS18B20_Low; 				//拉低DQ
-    delay_us(750);    	//拉低750us
+    Delay_us(750);    	//拉低750us
     DS18B20_High; 			//DQ=1 
-		delay_us(15);     	//15US
+		Delay_us(15);     	//15US
 }
 //等待DS18B20的回应
 //返回1:未检测到DS18B20的存在
 //返回0:存在
-u8 DS18B20_Check(void) 	   
+uint8_t DS18B20_Check(void) 	   
 {   
-	u8 retry=0;
+	uint8_t retry=0;
 	DS18B20_Mode(IN);	//SET  INPUT	 
     while (GPIO_ReadInputDataBit(DS18B20_GPIO_PORT,DS18B20_GPIO_PIN)&&retry<200)
 	{
 		retry++;
-		delay_us(1);
+		Delay_us(1);
 	};	 
 	if(retry>=200)return 1;
 	else retry=0;
     while (!GPIO_ReadInputDataBit(DS18B20_GPIO_PORT,DS18B20_GPIO_PIN)&&retry<240)
 	{
 		retry++;
-		delay_us(1);
+		Delay_us(1);
 	};
 	if(retry>=240)return 1;	    
 	return 0;
@@ -48,23 +48,23 @@ u8 DS18B20_Check(void)
 //返回值：1/0
 u8 DS18B20_Read_Bit(void) 	 
 {
-    u8 data;
+    uint8_t data;
 	DS18B20_Mode(OUT);	//SET OUTPUT
     DS18B20_Low; 
-	delay_us(2);
+	Delay_us(2);
     DS18B20_High; 
 	DS18B20_Mode(IN);	//SET INPUT
-	delay_us(12);
+	Delay_us(12);
 	if(GPIO_ReadInputDataBit(DS18B20_GPIO_PORT,DS18B20_GPIO_PIN))data=1;
     else data=0;	 
-    delay_us(50);           
+    Delay_us(50);           
     return data;
 }
 //从DS18B20读取一个字节
 //返回值：读到的数据
-u8 DS18B20_Read_Byte(void)     
+uint8_t DS18B20_Read_Byte(void)     
 {        
-    u8 i,j,dat;
+    uint8_t i,j,dat;
     dat=0;
 	for (i=1;i<=8;i++) 
 	{
@@ -75,10 +75,10 @@ u8 DS18B20_Read_Byte(void)
 }
 //写一个字节到DS18B20
 //dat：要写入的字节
-void DS18B20_Write_Byte(u8 dat)     
+void DS18B20_Write_Byte(uint8_t dat)     
  {             
-    u8 j;
-    u8 testb;
+    uint8_t j;
+    uint8_t testb;
 	DS18B20_Mode(OUT);	//SET OUTPUT;
     for (j=1;j<=8;j++) 
 	{
@@ -87,16 +87,16 @@ void DS18B20_Write_Byte(u8 dat)
         if (testb) 
         {
             DS18B20_Low;	// Write 1
-            delay_us(2);                            
+            Delay_us(2);                            
             DS18B20_High;
-            delay_us(60);             
+            Delay_us(60);             
         }
         else 
         {
             DS18B20_Low;	// Write 0
-            delay_us(60);             
+            Delay_us(60);             
             DS18B20_High;
-            delay_us(2);                          
+            Delay_us(2);                          
         }
     }
 }
@@ -134,8 +134,8 @@ u8 DS18B20_Init(void)
 //返回值：温度值 （-550~1250） 
 short DS18B20_Get_Temp(void)
 {
-    u8 temp;
-    u8 TL,TH;
+    uint8_t temp;
+    uint8_t TL,TH;
 	short tem;
     DS18B20_Start ();  			// ds1820 start convert
     DS18B20_Rst();
@@ -159,7 +159,7 @@ short DS18B20_Get_Temp(void)
 	else return -tem;    
 }
 
-void DS18B20_Mode(u8 mode)
+void DS18B20_Mode(uint8_t mode)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
 	RCC_APB2PeriphClockCmd(DS18B20_GPIO_CLK, ENABLE);	 //使能PORTA口时钟

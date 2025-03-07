@@ -138,6 +138,7 @@ void USART1_IRQHandler(void)
 				RxState = 1;
 				Serial_RxPacket[pRxPacket] = '\0';
 				Serial_RxFlag = 1;
+				pRxPacket = 0;
 			}
 		}
 		

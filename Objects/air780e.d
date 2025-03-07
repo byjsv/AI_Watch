@@ -29,7 +29,9 @@
 .\objects\air780e.o: .\Library\stm32f10x_wwdg.h
 .\objects\air780e.o: .\Library\misc.h
 .\objects\air780e.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\air780e.o: .\System\delay.h
+.\objects\air780e.o: .\System\Delay.h
+.\objects\air780e.o: .\Hardware\OLED.h
+.\objects\air780e.o: .\Hardware\OLED_Data.h
 .\objects\air780e.o: .\System\Serial.h
 .\objects\air780e.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\air780e.o: AIR780E\Air780E.h

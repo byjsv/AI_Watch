@@ -1,6 +1,5 @@
 .\objects\ds18b20.o: Hardware\ds18b20.c
 .\objects\ds18b20.o: Hardware\ds18b20.h
-.\objects\ds18b20.o: .\System\sys.h
 .\objects\ds18b20.o: .\Start\stm32f10x.h
 .\objects\ds18b20.o: .\Start\core_cm3.h
 .\objects\ds18b20.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h

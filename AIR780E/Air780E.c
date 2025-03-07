@@ -1,6 +1,7 @@
 #include "stm32f10x.h"                  // Device header
 #include "string.h"
-#include "delay.h"
+#include "Delay.h"
+#include "OLED.h"
 
 #include "Serial.h"
 #include "Air780E.h"
@@ -38,7 +39,14 @@ uint8_t AT_SendCommand(char* command,char *Response, uint16_t timeout, uint8_t R
 {
 	uint8_t i=0;
     uint16_t j=0;
+	
+	if(!timeout)
+	{
+		timeout = strlen(command)*10;
+	}
     
+	OLED_Clear();
+	OLED_ShowString_Line(0,0,command,OLED_8X16);
     
     for(i=0;i<Retry;i++)
 	{
@@ -47,17 +55,26 @@ uint8_t AT_SendCommand(char* command,char *Response, uint16_t timeout, uint8_t R
 			if (Serial_RxFlag == 1) {
 				if (strstr(Serial_RxPacket, Response) != NULL) {
 					Serial_RxFlag = 0;
+					
+					OLED_ShowString_Line(0,16,Serial_RxPacket,OLED_6X8);
+					
 					return Success; // 成功接收到 "OK"
 				}
-				if (strstr(Serial_RxPacket, "ERROR") != NULL) {
+				else if (strstr(Serial_RxPacket, "ERROR") != NULL) 
+				{
 					Serial_RxFlag = 0;
+					
+					
 					return Failure; // 接收到 "ERROR"
 				}
 				Serial_RxFlag = 0; // 清除接收标志
 			}
-        //delay_ms(1);
+        Delay_ms(10);
 		}
 	}
+
+	OLED_ShowNum(0,48,1,1,OLED_6X8);
+
     return Failure; // 超时未收到有效响应
 }
 
@@ -66,8 +83,15 @@ uint8_t AT_SendCommand_2(char* command,char *Response, char *Response2, uint16_t
 {
 	uint8_t i=0;
     uint16_t j=0;
+	
+	if(!timeout)
+	{
+		timeout = strlen(command)*10;
+	}
     
-    
+	OLED_Clear();
+    OLED_ShowString_Line(0,0,command,OLED_8X16);
+	
     for(i=0;i<Retry;i++)
 	{
 		Serial_SendString(command);
@@ -75,11 +99,16 @@ uint8_t AT_SendCommand_2(char* command,char *Response, char *Response2, uint16_t
 			if (Serial_RxFlag == 1) {
 				if (strstr(Serial_RxPacket, Response) != NULL && strstr(Serial_RxPacket, Response2) != NULL)
 				{
+					
+					OLED_ShowString_Line(0,16,Serial_RxPacket,OLED_6X8);
 					Serial_RxFlag = 0;
+					
 					return Success; // 成功接收到 "OK"
 				}
-				if (strstr(Serial_RxPacket, "ERROR") != NULL ) {
+				else if (strstr(Serial_RxPacket, "ERROR") != NULL ) 
+				{
 					Serial_RxFlag = 0;
+					
 					return Failure; // 接收到 "ERROR"
 				}
 				Serial_RxFlag = 0; // 清除接收标志
@@ -87,6 +116,7 @@ uint8_t AT_SendCommand_2(char* command,char *Response, char *Response2, uint16_t
         //delay_ms(1);
 		}
 	}
+
     return Failure; // 超时未收到有效响应
 }
 
@@ -137,28 +167,59 @@ void errorLog()
 
 void AIR780E_Init(void)
 {
-	if(AT_SendCommand("AT\r\n", "OK\r\n", 3000, 10));
-	else errorLog();
-	if(AT_SendCommand("AT&F\r\n", "OK\r\n", 3000, 10));
-	else errorLog();
-	if(AT_SendCommand("AT+CSQ\r\n", "OK\r\n", 3000, 10));
-	else errorLog();
-	if(AT_SendCommand_2("AT+CPIN?\r\n", "READY","OK\r\n" ,3000, 10));
-	else errorLog();
-	if(AT_SendCommand("AT+COPS?\r\n", "OK\r\n", 3000, 10));
-	else errorLog();
-	if(AT_SendCommand_2("AT+CREG?\r\n", ",1","OK\r\n", 3000, 10));
-	else if(AT_SendCommand_2("AT+CREG?\r\n", ",5", "OK\r\n",3000, 10));
-	else errorLog();
-	if(AT_SendCommand("AT+CIPSHUT\r\n", "OK\r\n", 5000, 10)){}
-	if(AT_SendCommand_2("AT+CGATT?\r\n", "+CGATT: 1","OK\r\n" ,3000, 10));
-	else errorLog();
-	if(AT_SendCommand("AT+CSTT\r\n", "OK\r\n", 3000, 10));
-	else errorLog();
-	if(AT_SendCommand("AT+CIICR\r\n", "OK\r\n", 3000, 10));
-	else errorLog();
-	if(AT_SendCommand_2("AT+CIFSR\r\n", ".","\r\n" ,3000, 10));
-	else errorLog();
+	if(AT_SendCommand("AT\r\n", "OK", 3000, 10)){}
+	//else errorLog();
+	OLED_Update();
+	Delay_ms(1000);
+	
+	if(AT_SendCommand("AT&F\r\n", "OK", 3000, 10)){}
+	//else errorLog();
+	OLED_Update();
+	Delay_ms(1000);
+	
+	if(AT_SendCommand("AT+CSQ\r\n", "OK", 3000, 10)){}
+	//else errorLog();
+	OLED_Update();
+	Delay_ms(1000);
+	
+	if(AT_SendCommand_2("AT+CPIN?\r\n", "READY","OK" ,3000, 10)){}
+	//else errorLog();
+	OLED_Update();
+	Delay_ms(1000);
+	
+	if(AT_SendCommand("AT+COPS?\r\n", "OK", 3000, 10)){}
+	//else errorLog();
+	OLED_Update();
+	Delay_ms(1000);
+	
+	if(AT_SendCommand_2("AT+CREG?\r\n", ",1","OK", 3000, 10)){}
+	else if(AT_SendCommand_2("AT+CREG?\r\n", ",5", "OK",3000, 10)){}
+	//else errorLog();
+	OLED_Update();
+	Delay_ms(1000);
+	
+	if(AT_SendCommand("AT+CIPSHUT\r\n", "OK", 5000, 10)){}
+	OLED_Update();
+	Delay_ms(1000);
+		
+	if(AT_SendCommand_2("AT+CGATT?\r\n", "+CGATT: 1","OK" ,3000, 10)){}
+	//else errorLog();
+	OLED_Update();
+	Delay_ms(1000);
+		
+	if(AT_SendCommand("AT+CSTT\r\n", "OK", 3000, 10)){}
+	//else errorLog();
+	OLED_Update();
+	Delay_ms(1000);
+		
+	if(AT_SendCommand("AT+CIICR\r\n", "OK", 3000, 10)){}
+	//else errorLog();
+	OLED_Update();
+	Delay_ms(1000);
+		
+	if(AT_SendCommand_2("AT+CIFSR\r\n", ".","" ,3000, 10)){}
+	//else errorLog();
+	OLED_Update();
 	
 }
 
