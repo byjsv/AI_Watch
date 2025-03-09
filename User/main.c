@@ -17,6 +17,7 @@ void test_Dial_RunPlate()
 	MyRTC_Init();
 	Encoder_Init();
 	Key_Init();
+	Delay_Init();
 	
 	while(DS18B20_Init())	//DS18B20≥ı ºªØ	
 	{
@@ -52,7 +53,9 @@ int main(void)
 {
 	OLED_Init();
 	
-	xTaskCreate(myTask,"myTask",128,NULL,2,&myTaskHandler);
+	test_Dial_RunPlate();
+	
+	//xTaskCreate(myTask,"myTask",512,NULL,2,&myTaskHandler);
 	vTaskStartScheduler();
 	while (1)
 	{

@@ -934,6 +934,11 @@
               <FilePath>.\Hardware\OLED.h</FilePath>
             </File>
             <File>
+              <FileName>OLED_Addition.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\OLED_Addition.c</FilePath>
+            </File>
+            <File>
               <FileName>OLED_Data.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\OLED_Data.c</FilePath>
@@ -1004,6 +1009,11 @@
               <FilePath>.\menu\Menu_Show.h</FilePath>
             </File>
             <File>
+              <FileName>Menu_Show_Data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\menu\Menu_Show_Data.c</FilePath>
+            </File>
+            <File>
               <FileName>Parising_menu.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\menu\Parising_menu.h</FilePath>
@@ -1012,6 +1022,36 @@
               <FileName>Parsing_menu.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\menu\Parsing_menu.c</FilePath>
+            </File>
+            <File>
+              <FileName>Dial_Date.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\menu\Dial_Date.c</FilePath>
+            </File>
+            <File>
+              <FileName>Dial_Date.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\menu\Dial_Date.h</FilePath>
+            </File>
+            <File>
+              <FileName>Dial_Weather.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\menu\Dial_Weather.c</FilePath>
+            </File>
+            <File>
+              <FileName>Dial_Weather.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\menu\Dial_Weather.h</FilePath>
+            </File>
+            <File>
+              <FileName>Dial_HData.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\menu\Dial_HData.c</FilePath>
+            </File>
+            <File>
+              <FileName>Dial_HData.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\menu\Dial_HData.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -46,3 +46,5 @@
 .\objects\main.o: .\Hardware\Key.h
 .\objects\main.o: .\Hardware\ds18b20.h
 .\objects\main.o: .\menu\Dial.h
+.\objects\main.o: .\menu\Dial_Date.h
+.\objects\main.o: .\menu\Dial_HData.h

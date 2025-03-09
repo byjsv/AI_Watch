@@ -259,9 +259,6 @@ void Air780E_AIRequest(char* userContent, char* sysContent)
 	char buf[100] = {0};
 	char Body[1000];
 	
-	uint16_t i = 0;
-	uint8_t count = 0;
-	
     char protocol[10] = {0};  // 协议
     char host_and_port[50] = {0};  // 主机和端口
     char path[50] = {0};      // 路径
@@ -296,7 +293,6 @@ void Air780E_AIRequest(char* userContent, char* sysContent)
 
 	
 	const char *Content_Type = "application/json";
-	const char *Authorization = "sk-fastgpt";
 	
 	sprintf(Body,"{\"messages\": [{\"role\": \"system\", \"content\": \"%s\"}, {\"role\": \"user\", \"content\": \"%s\"}], \"model\": \"%s\"}",sysContent,userContent,ai_model);
 	
@@ -320,69 +316,66 @@ void Air780E_AIRequest(char* userContent, char* sysContent)
 	AT_SendCommand(Body,"",10,1);
 }
 
-char* Air780E_AIRecive(char* userContent, char* sysContent)
-{
-	char buf[100] = {0};
-	static char Body[1000];
-	
-	uint16_t i = 0;
-	uint8_t count = 0;
-	
-    char protocol[10] = {0};  // 协议
-    char host_and_port[50] = {0};  // 主机和端口
-    char path[50] = {0};      // 路径
-
-    // 分割协议
-    char *protocol_end = strstr(base_url, "://");
-    if (protocol_end != NULL) {
-        strncpy(protocol, base_url, protocol_end - base_url);
-        protocol[protocol_end - base_url] = '\0';  // 添加字符串结束符
-    } else {
-        //printf("无效的 URL：缺少协议\n");
-        return "";
-    }
-
-    // 分割主机和端口
-    char *host_start = protocol_end + 3;  // 跳过 "://"
-    char *path_start = strstr(host_start, "/");
-
-    if (path_start != NULL) {
-        strncpy(host_and_port, host_start, path_start - host_start);
-        host_and_port[path_start - host_start] = '\0';
-    } else {
-        strcpy(host_and_port, host_start);
-    }
-
-    // 分割路径
-    if (path_start != NULL) {
-        strcpy(path, path_start);
-    } else {
-        strcpy(path, "/");  // 默认路径
-    }
-
-	
-	const char *Content_Type = "application/json";
-	const char *Authorization = "sk-fastgpt";
-	
-	sprintf(Body,"{\"messages\": [{\"role\": \"system\", \"content\": \"%s\"}, {\"role\": \"user\", \"content\": \"%s\"}], \"model\": \"%s\"}",sysContent,userContent,ai_model);
-	
-	
-	
-	sprintf(buf, "GET %s/chat/completions HTTP/1.1\r\n", path);
-	AT_SendCommand(buf,"",10,1);
-	
-	sprintf(buf, "Host: %s\r\n", host_and_port);
-	AT_SendCommand(buf,"",10,1);
-	
-	sprintf(buf, "Content-Type: %s\r\n", Content_Type);
-	AT_SendCommand(buf,"",10,1);
-	
-	sprintf(buf, "Authorization: Bearer %s\r\n", api_key);
-	AT_SendCommand(buf,"",10,1);
-	
-	sprintf(buf, "Content-Length: %d\r\n\r\n", strlen(Body));
-	AT_SendCommand(buf,"",10,1);
-	
-	AT_SendCommand(Body,"",10,1);
-}
+//char* Air780E_AIRecive(char* userContent, char* sysContent)
+//{
+//	char buf[100] = {0};
+//	static char Body[1000];
+//	
+//	
+//    char protocol[10] = {0};  // 协议
+//    char host_and_port[50] = {0};  // 主机和端口
+//    char path[50] = {0};      // 路径
+//
+//    // 分割协议
+//    char *protocol_end = strstr(base_url, "://");
+//    if (protocol_end != NULL) {
+//        strncpy(protocol, base_url, protocol_end - base_url);
+//        protocol[protocol_end - base_url] = '\0';  // 添加字符串结束符
+//    } else {
+//        //printf("无效的 URL：缺少协议\n");
+//        return "";
+//    }
+//
+//    // 分割主机和端口
+//    char *host_start = protocol_end + 3;  // 跳过 "://"
+//    char *path_start = strstr(host_start, "/");
+//
+//    if (path_start != NULL) {
+//        strncpy(host_and_port, host_start, path_start - host_start);
+//        host_and_port[path_start - host_start] = '\0';
+//    } else {
+//        strcpy(host_and_port, host_start);
+//    }
+//
+//    // 分割路径
+//    if (path_start != NULL) {
+//        strcpy(path, path_start);
+//    } else {
+//        strcpy(path, "/");  // 默认路径
+//    }
+//
+//	
+//	const char *Content_Type = "application/json";
+//	
+//	sprintf(Body,"{\"messages\": [{\"role\": \"system\", \"content\": \"%s\"}, {\"role\": \"user\", \"content\": \"%s\"}], \"model\": \"%s\"}",sysContent,userContent,ai_model);
+//	
+//	
+//	
+//	sprintf(buf, "GET %s/chat/completions HTTP/1.1\r\n", path);
+//	AT_SendCommand(buf,"",10,1);
+//	
+//	sprintf(buf, "Host: %s\r\n", host_and_port);
+//	AT_SendCommand(buf,"",10,1);
+//	
+//	sprintf(buf, "Content-Type: %s\r\n", Content_Type);
+//	AT_SendCommand(buf,"",10,1);
+//	
+//	sprintf(buf, "Authorization: Bearer %s\r\n", api_key);
+//	AT_SendCommand(buf,"",10,1);
+//	
+//	sprintf(buf, "Content-Length: %d\r\n\r\n", strlen(Body));
+//	AT_SendCommand(buf,"",10,1);
+//	
+//	AT_SendCommand(Body,"",10,1);
+//}
 

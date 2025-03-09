@@ -29,3 +29,9 @@
 .\objects\menu_show.o: .\Library\stm32f10x_wwdg.h
 .\objects\menu_show.o: .\Library\misc.h
 .\objects\menu_show.o: menu\Menu_Show.h
+.\objects\menu_show.o: .\Hardware\OLED.h
+.\objects\menu_show.o: .\Hardware\OLED_Data.h
+.\objects\menu_show.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\menu_show.o: menu\Dial.h
+.\objects\menu_show.o: menu\Dial_Date.h
+.\objects\menu_show.o: menu\Dial_HData.h

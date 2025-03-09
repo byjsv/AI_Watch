@@ -1,6 +1,16 @@
 #ifndef __DIAL_H
 #define __DIAL_H
 
+#include "Dial_Date.h"
+#include "Dial_HData.h"
+
+typedef struct {            //   按键消息结构体
+	int8_t roll;
+	int8_t enter;
+}Buttom_Message;
+
+extern Buttom_Message buttom;
+
 #define NULL_Func 0
 
 void Dial_ShowDate(uint8_t PosX,uint8_t PosY,uint16_t year,uint8_t month,uint8_t day,uint8_t FontSize);

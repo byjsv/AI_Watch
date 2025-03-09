@@ -26,50 +26,6 @@
 #include <stdarg.h>
 //#include <W25Q64.h>
 
-/**
-  * 数据存储格式：
-  * 纵向8点，高位在下，先从左到右，再从上到下
-  * 每一个Bit对应一个像素点
-  * 
-  *      B0 B0                  B0 B0
-  *      B1 B1                  B1 B1
-  *      B2 B2                  B2 B2
-  *      B3 B3  ------------->  B3 B3 --
-  *      B4 B4                  B4 B4  |
-  *      B5 B5                  B5 B5  |
-  *      B6 B6                  B6 B6  |
-  *      B7 B7                  B7 B7  |
-  *                                    |
-  *  -----------------------------------
-  *  |   
-  *  |   B0 B0                  B0 B0
-  *  |   B1 B1                  B1 B1
-  *  |   B2 B2                  B2 B2
-  *  --> B3 B3  ------------->  B3 B3
-  *      B4 B4                  B4 B4
-  *      B5 B5                  B5 B5
-  *      B6 B6                  B6 B6
-  *      B7 B7                  B7 B7
-  * 
-  * 坐标轴定义：
-  * 左上角为(0, 0)点
-  * 横向向右为X轴，取值范围：0~127
-  * 纵向向下为Y轴，取值范围：0~63
-  * 
-  *       0             X轴           127 
-  *      .------------------------------->
-  *    0 |
-  *      |
-  *      |
-  *      |
-  *  Y轴 |
-  *      |
-  *      |
-  *      |
-  *   63 |
-  *      v
-  * 
-  */
 
 
 /*全局变量*********************/
@@ -83,21 +39,6 @@
 uint8_t OLED_DisplayBuf[8][128];
 uint8_t OLED_DisplayBuf1[8][128];
 
-/* 
-  *       0             X轴           127 
-  *      .------------------------------->
-  *    0 |8
-  *      |8
-  *      |8
-  *      |8
-  *  Y轴 |8
-  *      |8
-  *      |8
-  *      |8
-  *   63 |8
-  *      v
-  * 
-  */
 
 
 /*********************全局变量*/
@@ -762,12 +703,25 @@ void OLED_ShowString(int16_t X, int16_t Y, char *String, uint8_t FontSize)
 void OLED_ShowNum(int16_t X, int16_t Y, uint32_t Number, uint8_t Length, uint8_t FontSize)
 {
 	uint8_t i;
+	uint32_t N=Number;
+	uint8_t count=0;
+	uint8_t t=0;
+	
+	while(N>0){
+		N/=10;
+		count++;
+	}
+	
 	for (i = 0; i < Length; i++)		//遍历数字的每一位							
 	{
 		/*调用OLED_ShowChar函数，依次显示每个数字*/
 		/*Number / OLED_Pow(10, Length - i - 1) % 10 可以十进制提取数字的每一位*/
 		/*+ '0' 可将数字转换为字符格式*/
-		OLED_ShowChar(X + i * FontSize, Y, Number / OLED_Pow(10, Length - i - 1) % 10 + '0', FontSize);
+		if((Length - i - 1)<count)
+		{
+			OLED_ShowChar(X + t * FontSize, Y, Number / OLED_Pow(10, Length - i - 1) % 10 + '0', FontSize);
+			t++;
+		}
 	}
 }
 

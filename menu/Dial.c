@@ -1,6 +1,11 @@
 #include "stm32f10x.h"                  // Device header
+
+#include "freeRTOS.h"
+#include "task.h"
+#include "queue.h"
 #include "Dial.h"
 
+#include "Menu_Show.h"
 #include "OLED.h"
 #include "ds18b20.h"
 #include "Key.h"
@@ -9,54 +14,33 @@
 
 #include "string.h"
 
-struct Plate_class{
-	char *Plate_Name;		// 选项名字
-	void (*func)(void);     // 显示函数指针
-	void (*func_Exit)(void);          //  退出函数
-};
 
 
-
-int8_t Dial_RollEvent()
+int8_t Dial_RollEvent(void) // 菜单滚动
 {
-	return Encoder_Get_Div4();
+	if (Key_Up_Get()) // 按键上接到PB15;
+	{
+		return 1;
+	}
+	if (Key_Down_Get()) // 按键下接到PB13;
+	{
+		return -1;
+	}
+	return Encoder_Get_Div4(); // 旋钮编码器PA8,PA9;
 }
-
 int8_t Dial_EnterEvent(void) // 菜单确认
 {
 	return Key_Enter_Get(); // 确认键接到PB14;
 }
-	
+int8_t Menu_BackEvent(void) // 菜单返回
+{
+	return Key_Back_Get(); // 返回键接到PB12;
+}
 
 /****************工具函数**************/
 
-uint8_t get_Num_Len(uint32_t num)
-{
-	uint8_t i=0;
-	while(num)
-	{
-		num /= 10;
-		i++;
-	}
-	return i;
-}
 
-void Show_large_num(uint8_t X,uint8_t Y,uint8_t n)
-{
-	switch(n)
-	{
-		case 0:OLED_ShowImage(X,Y,16,28,Num0);break;
-		case 1:OLED_ShowImage(X,Y,16,28,Num1);break;
-		case 2:OLED_ShowImage(X,Y,16,28,Num2);break;
-		case 3:OLED_ShowImage(X,Y,16,28,Num3);break;
-		case 4:OLED_ShowImage(X,Y,16,28,Num4);break;
-		case 5:OLED_ShowImage(X,Y,16,28,Num5);break;
-		case 6:OLED_ShowImage(X,Y,16,28,Num6);break;
-		case 7:OLED_ShowImage(X,Y,16,28,Num7);break;
-		case 8:OLED_ShowImage(X,Y,16,28,Num8);break;
-		case 9:OLED_ShowImage(X,Y,16,28,Num9);break;
-	}
-}
+
 
 /****************控件函数********************/
 
@@ -166,43 +150,14 @@ void Dial_ShowText_contral()
 	}
 }
 
-void Dial_ShowDate(uint8_t PosX,uint8_t PosY,uint16_t year,uint8_t month,uint8_t day,uint8_t FontSize)
+
+			/***********设置选项***********/
+void Show_Setting()
 {
-	uint8_t space = 3;
-	
-	uint8_t length = 0;
-	
-	OLED_ShowNum(PosX,PosY,year,get_Num_Len(year),FontSize);
-	length += get_Num_Len(year)*FontSize + space;
-	OLED_ShowNum(PosX + length,PosY,month,get_Num_Len(month),FontSize);
-	length += get_Num_Len(month)*FontSize + space;
-	OLED_ShowNum(PosX + length,PosY,day,get_Num_Len(day),FontSize);
+	OLED_ShowImage((127-50)/2,(64-50)/2+10,50,50,Setting);
+
 }
 
-void Dial_ShowTime_FULL(uint8_t PosX,uint8_t PosY,uint8_t hour,uint8_t min,uint8_t sec)
-{
-	uint8_t length = 0;
-	
-	Show_large_num(PosX+length,PosY,hour/10);
-	length += 16;
-	Show_large_num(PosX+length,PosY,hour%10);
-	length += 16;
-	OLED_ShowImage(PosX+length,PosY,12,28,spit);
-	length += 12;
-	Show_large_num(PosX+length,PosY,min/10);
-	length += 16;
-	Show_large_num(PosX+length,PosY,min%10);
-	length += 16;
-	length += 4;
-	OLED_ShowNum(PosX+length,PosY+28-16,sec,2,OLED_8X16);
-	
-}
-
-void Dial_ShowSigner(uint8_t x,uint8_t y)
-{
-	//OLED_ShowString(x,y,"4G",OLED_6X8);
-	OLED_ShowImage(x,y,12,8,No_Signer);
-}
 
 void Dial_ShowData(uint8_t temp,uint8_t HRate, uint8_t Oxygen)
 {
@@ -210,64 +165,12 @@ void Dial_ShowData(uint8_t temp,uint8_t HRate, uint8_t Oxygen)
 }
 
 
-uint8_t Line_PosX=0;
 
-void Dial_ShowData_Line(uint16_t num,uint16_t MIN,uint16_t MAX)
-{	
-	
-	OLED_DrawPoint(Line_PosX,64-(num-MIN)*64/(MAX-MIN));
-	if((Line_PosX)<(128*3/4))
-	{
-		(Line_PosX)++;
-	}else
-	{
-		OLED_DisplayBuffMove(OLED_Left);
-	}
-	//OLED_ShowNum(0,16,CursorPosX,3,OLED_8X16);
-}
-
-
-
-
-/****************控件布局***********************/
-
-void Time_Plate()
-{
-	MyRTC_ReadTime();
-	
-	Dial_ShowDate(0,47+8,MyRTC_Time[0],MyRTC_Time[1],MyRTC_Time[2],OLED_6X8);
-	Dial_ShowTime_FULL((127-96)/2,16+2,MyRTC_Time[3],MyRTC_Time[4],MyRTC_Time[5]);
-	
-	Dial_ShowSigner(127-OLED_6X8*5,0);
-}
-
-void Time_Plate_Exit()
-{
-	
-}
-
-void Health_Plate()
-{
-	static short temperature = 0; 				//温度值
-    
-	temperature=DS18B20_Get_Temp();	//读取温度
-	
-	
-	Dial_ShowData_Line(temperature/10,10,40);
-	OLED_ShowNum(0,0,temperature,3,OLED_8X16);
-	OLED_ShowString(24,0,"℃",OLED_8X16);
-	//OLED_DrawPoint(2*8,16);
-	//OLED_ShowNum(0,0,1,3,OLED_8X16);
-}
 
 void Health_Plate_Exit()
 {
-	Line_PosX = 0;
+
 }
-
-
-/*********************主界面选项**********************/
-
 
 void Plate_ShowName(char *Name,uint8_t Y)
 {
@@ -278,67 +181,137 @@ void Plate_ShowName(char *Name,uint8_t Y)
 		length_name++;
 	}
 	
-	OLED_ShowString(63-length_name*OLED_8X16/2,Y,Name,OLED_8X16);
+	OLED_ShowString_12X12(63-length_name*6/2,Y,Name);
 	//OLED_ReverseArea();
 }
 
+/*********************主界面选项**********************/
+struct Plate_class{                        //  选项结构体
+	char *Plate_Name;		// 选项名字
+	void (*func)(void);     // 显示函数指针
+	void (*func_Exit)(void);          //  退出函数
+	void (*enter_func)(void);
+};
 
-void Dial_RunPlate()
+
+
+Buttom_Message buttom = {0,0};
+
+TaskHandle_t buttomHandle;          // 按键消息句柄
+TaskHandle_t DialShow_Handle;          // 显示消息句柄
+
+
+void vButtomTask(void *pvParameters)
 {
-	
-	int8_t select = 0;
+
+    while (1) {
+        // 检测按键事件
+		buttom.roll = Dial_RollEvent();
+        buttom.enter = Dial_EnterEvent();
+		if(buttom.roll!=0)
+		{
+			vTaskResume(DialShow_Handle);
+		}
+		else if(buttom.enter!=0)
+		{
+			vTaskResume(DialShow_Handle);
+		}
+
+
+        // 延时 30ms
+        vTaskDelay(pdMS_TO_TICKS(30));
+    }
+}
+
+
+
+
+
+void vDialShow_Task(void *pvParameters)
+{
+
+	int8_t select=0;			//	界面下标
 	uint8_t length = 0;
-	
-	uint8_t Roll_Event = 0;
-	
+	int8_t select1=0;
 	
 	struct Plate_class plate[] = {
-		{"时间",Time_Plate},
-		{"温度",Health_Plate,Health_Plate_Exit},
-		{"应用",NULL_Func,NULL_Func},
+		{"时间",Time_Plate,Time_Plate_Exit},
+		{"",Health_Plate,Health_Plate_Exit},
+		{"设置",Show_Setting,NULL_Func,SettingMenu},
 		{".."}
 	};
-	while(plate[length].Plate_Name[0]!='.')
+	
+	while(plate[length].Plate_Name[0]!='.')			//		计算有几个选项
 	{
 		length++;
 	}
 	
-	
-	while(1)
-	{
-		Roll_Event = Dial_RollEvent();
-		
-		Plate_ShowName(plate[select].Plate_Name,0);
-		
-		if(Roll_Event)
-		{
-			if(plate[select].func_Exit)
-			{
-				plate[select].func_Exit();
-			}
+	while (1) {
+
+        if (buttom.roll!=0) {
+            // 取出数据
+			select1 = select;
+           
+
+            // 切换界面下标
+			select += buttom.roll;
 			
+			buttom.roll=0;
 			
-			select += Roll_Event;
 			
 			if(select > (length-1))select = 0;
 			
 			if(select < 0)select = (length-1);
 			
 			
-			OLED_Clear();
-		}
-		else
-		{
-			if(plate[select].func)
-			{
-				plate[select].func();        //  运行对应项的显示函数
-			}
+			 // 调用退出函数
+            if (plate[select1].func_Exit != NULL) {
+                plate[select1].func_Exit();
+            }
 			
+			
+			OLED_Clear();
+        }
+		
+		// 检测到按下事件，调用按下函数
+		if (buttom.enter!=0&&plate[select].enter_func!=NULL) {
+			buttom.enter = 0;
+			plate[select].enter_func();
 		}
+
+        // 调用显示函数
+        if (plate[select].func != NULL) {
+            plate[select].func();
+			Plate_ShowName(plate[select].Plate_Name,0);
+        }
 		
 
-		
-		OLED_Update();
-	}		
+        // 更新显示
+        OLED_Update();
+
+        // 延时 30ms
+        vTaskDelay(pdMS_TO_TICKS(3));
+    }
+}
+
+
+
+void Dial_RunPlate()
+{
+
+
+    // 创建按键任务
+    xTaskCreate(vButtomTask, "ButtonTask", 128, NULL, 2, NULL);
+
+    // 创建显示任务
+    xTaskCreate(vDialShow_Task, "DialShowTask", 512, NULL, 1, NULL);
+
+    // 启动调度器
+    vTaskStartScheduler();
+
+    // 如果调度器启动失败，进入死循环
+    for (;;)
+	{
+	}
 }
 

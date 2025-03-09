@@ -4,27 +4,13 @@
 #define __DS18B20_H 
 //#include "sys.h"   
 
-/*****************辰哥单片机设计******************
-											STM32
- * 文件			:	DS18B20数字温度传感器h文件                   
- * 版本			: V1.0
- * 日期			: 2024.8.13
- * MCU			:	STM32F103C8T6
- * 接口			:	见代码							
- * BILIBILI	:	辰哥单片机设计
- * CSDN			:	辰哥单片机设计
- * 作者			:	辰哥
 
-**********************BEGIN***********************/
-
-/***************根据自己需求更改****************/
 //DS18B20引脚宏定义						
 
 #define DS18B20_GPIO_PORT		GPIOA
 #define DS18B20_GPIO_PIN		GPIO_Pin_3
 #define DS18B20_GPIO_CLK   	RCC_APB2Periph_GPIOA
 
-/*********************END**********************/
 //输出状态定义
 #define OUT 1
 #define IN  0
