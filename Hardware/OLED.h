@@ -26,6 +26,9 @@ extern uint8_t OLED_DisplayBuf[8][128];
 
 /*函数声明*********************/
 
+/*工具函数*/
+uint32_t OLED_Pow(uint32_t X, uint32_t Y);
+
 /*初始化函数*/
 void OLED_Init(void);
 
@@ -59,6 +62,7 @@ void OLED_DisplayBuffMoveArea(uint8_t PosX, uint8_t PosY, uint8_t EndX, uint8_t 
 void OLED_Rotation_C_P(int8_t CX, int8_t CY, float *PX, float *PY, int16_t Angle);
 void OLED_Rotation_Block(int8_t X, int8_t Y, int8_t Width, int16_t Angle);
 void OLED_ShowString_12X12(int16_t X, int16_t Y, char *String);
+void OLED_ShowNum_Left(int16_t X, int16_t Y, uint32_t Number, uint8_t Length, uint8_t FontSize);
 
 /*绘图函数*/
 void OLED_DrawPoint(int16_t X, int16_t Y);

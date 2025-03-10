@@ -50,23 +50,23 @@ void Health_Plate()
 { 				//温度值
     
 	hData.temperature=DS18B20_Get_Temp();	//读取温度
-	OLED_ShowNum(tempX,tempY,hData.temperature/10,2,OLED_8X16);
-	OLED_ShowNum(tempX+8*2+8,tempY,hData.temperature%10,1,OLED_8X16);
+	OLED_ShowNum_Left(tempX,tempY,hData.temperature/10,2,OLED_8X16);
+	OLED_ShowNum_Left(tempX+8*2+8,tempY,hData.temperature%10,1,OLED_8X16);
 	OLED_ShowChar(tempX+8*2,tempY,'.',OLED_8X16);
 	OLED_ShowString(tempX+24+8,tempY,"℃",OLED_8X16);
 	OLED_ShowString_12X12(tempX+12+5*8,   tempY+(16-12)/2,"体表温度");
 	
 	OLED_ShowImage(HRateX,   HRateY+(16-12)/2,12,12,HRate);
-	OLED_ShowNum  (HRateX+12,HRateY, hData.HRate,3,OLED_8X16);
+	OLED_ShowNum_Left(HRateX+12,HRateY, hData.HRate,3,OLED_8X16);
 	OLED_ShowString_12X12(HRateX+12+4*8,  HRateY+(16-12)/2,"心率");
 	
 	OLED_ShowImage(OxRateX,   OxRateY+(16-12)/2,12,12,OxRate);
-	OLED_ShowNum  (OxRateX+12,OxRateY, hData.OxRate,3,OLED_8X16);
+	OLED_ShowNum_Left(OxRateX+12,OxRateY, hData.OxRate,3,OLED_8X16);
 	OLED_ShowChar(OxRateX+12+3*8,OxRateY+8,'%',OLED_6X8);
 	OLED_ShowString_12X12(OxRateX+12+4*8,   OxRateY+(16-12)/2,"血氧饱和度");
 	
 	OLED_ShowImage(DStepX,   DStepY+(16-12)/2,12,12,step);
-	OLED_ShowNum  (DStepX+12,DStepY, hData.DailyStep,3,OLED_8X16);
+	OLED_ShowNum_Left(DStepX+12,DStepY, hData.DailyStep,3,OLED_8X16);
 	OLED_ShowString_12X12(OxRateX+12+4*8,   OxRateY+(16-12)/2,"");
 	
 	//OLED_ShowString();

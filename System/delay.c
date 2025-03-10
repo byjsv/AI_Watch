@@ -39,7 +39,10 @@ void Delay_us(uint32_t us) {
   */
 void Delay_ms(uint32_t xms)
 {
-	vTaskDelay(xms);
+	while(xms--)
+	{
+		Delay_us(1000);
+	}
 }
  
 /**
@@ -54,3 +57,18 @@ void Delay_s(uint32_t xs)
 		Delay_ms(1000);
 	}
 } 
+
+void delay_ms(uint32_t xms)
+{
+	Delay_ms(xms);
+}
+
+void delay_us(uint32_t us)
+{
+	Delay_us(us);
+}
+
+void delay_init(void)
+{
+	Delay_Init();
+}

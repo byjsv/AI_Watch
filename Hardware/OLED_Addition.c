@@ -119,3 +119,33 @@ void OLED_ShowString_12X12(int16_t X, int16_t Y, char *String)
 	}
 }
 
+void OLED_ShowNum_Left(int16_t X, int16_t Y, uint32_t Number, uint8_t Length, uint8_t FontSize)
+{
+	uint8_t i;
+	uint32_t N=Number;
+	uint8_t count=0;
+	uint8_t t=0;
+	
+	while(N>0){
+		N/=10;
+		count++;
+	}
+	if(Number ==0)
+	{
+		count++;
+	}
+	OLED_ClearArea(X,Y,Length*FontSize,FontSize==OLED_6X8?8:16);
+	
+	for (i = 0; i < Length; i++)		//遍历数字的每一位							
+	{
+		/*调用OLED_ShowChar函数，依次显示每个数字*/
+		/*Number / OLED_Pow(10, Length - i - 1) % 10 可以十进制提取数字的每一位*/
+		/*+ '0' 可将数字转换为字符格式*/
+		if((Length - i - 1)<count)
+		{
+			OLED_ShowChar(X + t * FontSize, Y, Number / OLED_Pow(10, Length - i - 1) % 10 + '0', FontSize);
+			t++;
+		}
+	}
+}
+

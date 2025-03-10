@@ -46,11 +46,11 @@ void Dial_ShowDate(uint8_t PosX,uint8_t PosY,uint16_t year,uint8_t month,uint8_t
 	
 	uint8_t length = 0;
 	
-	OLED_ShowNum(PosX,PosY,year,get_Num_Len(year),FontSize);
+	OLED_ShowNum_Left(PosX,PosY,year,get_Num_Len(year),FontSize);
 	length += get_Num_Len(year)*FontSize + space;
-	OLED_ShowNum(PosX + length,PosY,month,get_Num_Len(month),FontSize);
+	OLED_ShowNum_Left(PosX + length,PosY,month,get_Num_Len(month),FontSize);
 	length += get_Num_Len(month)*FontSize + space;
-	OLED_ShowNum(PosX + length,PosY,day,get_Num_Len(day),FontSize);
+	OLED_ShowNum_Left(PosX + length,PosY,day,get_Num_Len(day),FontSize);
 }
 
 void Dial_ShowTime_FULL(uint8_t PosX,uint8_t PosY,uint8_t hour,uint8_t min,uint8_t sec)
@@ -68,7 +68,7 @@ void Dial_ShowTime_FULL(uint8_t PosX,uint8_t PosY,uint8_t hour,uint8_t min,uint8
 	Show_large_num(PosX+length,PosY,min%10);
 	length += 16;
 	length += 4;
-	OLED_ShowNum(PosX+length,PosY+28-16,sec,2,OLED_8X16);
+	OLED_ShowNum_Left(PosX+length,PosY+28-16,sec,2,OLED_8X16);
 	
 }
 

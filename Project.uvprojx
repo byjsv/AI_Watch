@@ -898,6 +898,16 @@
               <FileType>5</FileType>
               <FilePath>.\System\Serial.h</FilePath>
             </File>
+            <File>
+              <FileName>GPIO.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\System\GPIO.c</FilePath>
+            </File>
+            <File>
+              <FileName>GPIO.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\System\GPIO.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1053,6 +1063,16 @@
               <FileType>5</FileType>
               <FilePath>.\menu\Dial_HData.h</FilePath>
             </File>
+            <File>
+              <FileName>sport_mode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\menu\sport_mode.c</FilePath>
+            </File>
+            <File>
+              <FileName>sport_mode.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\menu\sport_mode.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1069,9 +1089,44 @@
               <FilePath>.\MPU6050\MPU6050.h</FilePath>
             </File>
             <File>
-              <FileName>MPU6050_Reg.h</FileName>
+              <FileName>dmpKey.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\MPU6050\MPU6050_Reg.h</FilePath>
+              <FilePath>.\MPU6050\dmpKey.h</FilePath>
+            </File>
+            <File>
+              <FileName>dmpmap.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MPU6050\dmpmap.h</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\inv_mpu.c</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MPU6050\inv_mpu.h</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu_dmp_motion_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\inv_mpu_dmp_motion_driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu_dmp_motion_driver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MPU6050\inv_mpu_dmp_motion_driver.h</FilePath>
+            </File>
+            <File>
+              <FileName>MPU6050_I2C.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\MPU6050_I2C.c</FilePath>
+            </File>
+            <File>
+              <FileName>MPU6050_I2C.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\MPU6050\MPU6050_I2C.h</FilePath>
             </File>
           </Files>
         </Group>

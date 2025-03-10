@@ -1,7 +1,7 @@
 #include "stm32f10x.h"                  // Device header
 #include <time.h>
 
-uint16_t MyRTC_Time[] = {2023, 1, 1, 23, 59, 55};
+uint16_t MyRTC_Time[] = {2024, 10, 12, 23, 59, 55};
 
 void MyRTC_SetTime(void);
 
@@ -35,6 +35,8 @@ void MyRTC_Init(void)
 		RTC_WaitForSynchro();
 		RTC_WaitForLastTask();
 	}
+	
+	
 }
 
 //如果LSE无法起振导致程序卡死在初始化函数中
