@@ -35,3 +35,4 @@
 .\objects\menu_show.o: menu\Dial.h
 .\objects\menu_show.o: menu\Dial_Date.h
 .\objects\menu_show.o: menu\Dial_HData.h
+.\objects\menu_show.o: menu\sport_mode.h

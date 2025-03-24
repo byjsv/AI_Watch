@@ -72,3 +72,10 @@ void delay_init(void)
 {
 	Delay_Init();
 }
+
+void TaskDelay_ms(uint32_t xms)
+{
+	vTaskDelay(xms);
+}
+
+

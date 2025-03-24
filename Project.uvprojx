@@ -993,6 +993,16 @@
               <FileType>5</FileType>
               <FilePath>.\Hardware\ds18b20.h</FilePath>
             </File>
+            <File>
+              <FileName>max30102.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\max30102.c</FilePath>
+            </File>
+            <File>
+              <FileName>max30102.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\max30102.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

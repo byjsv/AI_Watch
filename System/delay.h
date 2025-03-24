@@ -11,4 +11,6 @@ void delay_ms(uint32_t xms);
 void delay_us(uint32_t us);
 void delay_init(void);
 
+void TaskDelay_ms(uint32_t xms);
+
 #endif

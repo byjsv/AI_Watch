@@ -1,6 +1,7 @@
 #include "stm32f10x.h"                  // Device header
 #include "OLED.h"
 #include "ds18b20.h"
+#include "Dial_HData.h"
 
 #define tempX 0
 #define tempY 0
@@ -14,14 +15,7 @@
 #define DStepX 0
 #define DStepY 48
 
-typedef struct {
-	short temperature;
-	uint8_t HRate;
-	uint8_t OxRate;
-	uint32_t DailyStep;
-}healthData;
-
-healthData  hData = {0,10,100,10000};
+struct healthData  hData = {0,10,100,10000};
 
 uint8_t Line_PosX=0;
 
@@ -43,13 +37,19 @@ void Dial_ShowData_Line(uint16_t num,uint16_t MIN,uint16_t MAX)
 
 
 /****************控件布局***********************/
-
+void HData_SetData(short temperature,uint8_t HRate,uint8_t OxRate,uint32_t DailyStep)
+{
+	hData.DailyStep = DailyStep;
+	hData.HRate = HRate;
+	hData.OxRate = OxRate;
+	hData.temperature = temperature;
+}
 
 //short temperature = 0;
 void Health_Plate()
 { 				//温度值
     
-	hData.temperature=DS18B20_Get_Temp();	//读取温度
+	//hData.temperature=DS18B20_Get_Temp();	//读取温度
 	OLED_ShowNum_Left(tempX,tempY,hData.temperature/10,2,OLED_8X16);
 	OLED_ShowNum_Left(tempX+8*2+8,tempY,hData.temperature%10,1,OLED_8X16);
 	OLED_ShowChar(tempX+8*2,tempY,'.',OLED_8X16);

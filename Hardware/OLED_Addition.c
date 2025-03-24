@@ -96,7 +96,7 @@ void OLED_ShowString_12X12(int16_t X, int16_t Y, char *String)
 		if (CharLength == 1)	//如果是单字节字符
 		{
 			/*使用OLED_ShowChar显示此字符*/
-			OLED_ShowChar(X + XOffset, Y, SingleChar[0], OLED_6X8);
+			OLED_ShowChar(X + XOffset, Y+2, SingleChar[0], OLED_6X8);
 			XOffset += 6;
 		}
 		else					//否则，即多字节字符
@@ -111,7 +111,7 @@ void OLED_ShowString_12X12(int16_t X, int16_t Y, char *String)
 					break;		//跳出循环，此时pIndex的值为指定字符的索引
 				}
 			}
-			/*将字模库OLED_CF16x16的指定数据以16*16的图像格式显示*/
+			/*将字模库OLED_CF16x16的指定数据以12*12的图像格式显示*/
 			OLED_ShowImage(X + XOffset, Y, 12, 12, OLED_CF12x12[pIndex].Data);
 			XOffset += 12;
 			

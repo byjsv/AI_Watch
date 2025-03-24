@@ -42,6 +42,7 @@
 .\objects\dial.o: menu\Dial.h
 .\objects\dial.o: menu\Dial_Date.h
 .\objects\dial.o: menu\Dial_HData.h
+.\objects\dial.o: menu\sport_mode.h
 .\objects\dial.o: menu\Menu_Show.h
 .\objects\dial.o: .\Hardware\OLED.h
 .\objects\dial.o: .\Hardware\OLED_Data.h
@@ -49,4 +50,5 @@
 .\objects\dial.o: .\Hardware\Key.h
 .\objects\dial.o: .\System\MyRTC.h
 .\objects\dial.o: .\Hardware\Encoder.h
+.\objects\dial.o: .\System\Delay.h
 .\objects\dial.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

@@ -30,4 +30,6 @@
 .\objects\max30102.o: .\Library\stm32f10x_wwdg.h
 .\objects\max30102.o: .\Library\misc.h
 .\objects\max30102.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\max30102.o: .\System\delay.h
+.\objects\max30102.o: .\System\Delay.h
+.\objects\max30102.o: .\System\GPIO.h
+.\objects\max30102.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

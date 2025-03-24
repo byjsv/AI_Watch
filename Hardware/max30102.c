@@ -1,18 +1,6 @@
 #include "max30102.h"
 #include "Delay.h"
-
-/*****************辰哥单片机设计******************
-											STM32
- * 文件			:	MAX30102心率血氧传感器c文件                   
- * 版本			: V1.0
- * 日期			: 2024.8.18
- * MCU			:	STM32F103C8T6
- * 接口			:	见max30102.h文件							
- * BILIBILI	:	辰哥单片机设计
- * CSDN			:	辰哥单片机设计
- * 作者			:	辰哥
-
-**********************BEGIN***********************/			
+#include "GPIO.h"		
 
 u8 max30102_Bus_Write(u8 Register_Address, u8 Word_Data)
 {

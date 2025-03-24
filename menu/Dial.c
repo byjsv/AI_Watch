@@ -11,6 +11,7 @@
 #include "Key.h"
 #include "MyRTC.h"
 #include "Encoder.h"
+#include "Delay.h"
 
 #include "string.h"
 
@@ -199,6 +200,7 @@ Buttom_Message buttom = {0,0};
 
 TaskHandle_t buttomHandle;          // 按键消息句柄
 TaskHandle_t DialShow_Handle;          // 显示消息句柄
+TaskHandle_t UpdateData_Handle;          // 更新数据句柄
 
 
 void vButtomTask(void *pvParameters)
@@ -236,7 +238,7 @@ void vDialShow_Task(void *pvParameters)
 	
 	struct Plate_class plate[] = {
 		{"时间",Time_Plate,Time_Plate_Exit},
-		{"",Health_Plate,Health_Plate_Exit},
+		{"",Health_Plate,Health_Plate_Exit,HealthMenu},
 		{"设置",Show_Setting,NULL_Func,SettingMenu},
 		{".."}
 	};
@@ -294,17 +296,33 @@ void vDialShow_Task(void *pvParameters)
     }
 }
 
+void vUpdateData(void *pvParameters)
+{
+	while(1)
+	{
+		OLED_ShowNum(127-8,0,1,1,OLED_8X16);
+		OLED_Update();
+		Sport_getData();
+		HData_SetData(DS18B20_Get_Temp(),0,0,Watch_Posture.step);
+		TaskDelay_ms(10);
+		
+	}
+}
 
 
 void Dial_RunPlate()
 {
+	Sport_MODE_Init();
 
 
     // 创建按键任务
-    xTaskCreate(vButtomTask, "ButtonTask", 128, NULL, 2, NULL);
+    xTaskCreate(vButtomTask, "ButtonTask", 128, NULL, 4, &buttomHandle);
 
     // 创建显示任务
-    xTaskCreate(vDialShow_Task, "DialShowTask", 512, NULL, 1, NULL);
+    xTaskCreate(vDialShow_Task, "DialShowTask", 512, NULL, 3, &DialShow_Handle);
+	
+	// 创建采集数据任务
+	xTaskCreate(vUpdateData, "UpdateData", 1024, NULL, 5, &UpdateData_Handle);
 
     // 启动调度器
     vTaskStartScheduler();

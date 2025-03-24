@@ -12,5 +12,6 @@ struct Option_Class
 uint8_t Menu_GetOptionStrLen(char *String);
 void Run_List_Menu(struct Option_Class *Option_Class_List);
 void SettingMenu(void);
+void HealthMenu(void);
 
 #endif

@@ -31,3 +31,4 @@
 .\objects\dial_hdata.o: .\Hardware\OLED.h
 .\objects\dial_hdata.o: .\Hardware\OLED_Data.h
 .\objects\dial_hdata.o: .\Hardware\ds18b20.h
+.\objects\dial_hdata.o: menu\Dial_HData.h

@@ -33,5 +33,6 @@
 .\objects\dial_date.o: menu\Dial.h
 .\objects\dial_date.o: menu\Dial_Date.h
 .\objects\dial_date.o: menu\Dial_HData.h
+.\objects\dial_date.o: menu\sport_mode.h
 .\objects\dial_date.o: .\System\Delay.h
 .\objects\dial_date.o: .\System\MyRTC.h

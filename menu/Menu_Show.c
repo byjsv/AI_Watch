@@ -5,6 +5,8 @@
 
 #include "Dial.h"
 
+#define Screen_Length_Menu 4
+
 
 struct Option_Class Option_Class_List[] = {
 	{">>>"},
@@ -71,14 +73,14 @@ void Run_List_Menu(struct Option_Class *Option_Class_List)
 			buttom.enter=0;
 		}
 		
-		if(select>3)           // 达到菜单偏移的临界值
+		if(select>Screen_Length_Menu)           // 达到菜单偏移的临界值
 		{
 			for(i=0;i<length;i++)
 			{
-				OLED_ShowString(startX,0+(i-select+3)*16,Option_Class_List[i].String,OLED_8X16);
+				OLED_ShowString_12X12(startX,0+(i-select+Screen_Length_Menu)*12,Option_Class_List[i].String);
 				if(i==select)
 				{
-					OLED_ReverseArea(0,0+(i-select+3)*16,Menu_GetOptionStrLen(Option_Class_List[i].String)*8+startX*2,16);
+					OLED_ReverseArea(0,0+(i-select+Screen_Length_Menu)*12,Menu_GetOptionStrLen(Option_Class_List[i].String)*8+startX*2,12);
 					
 				}
 			}
@@ -87,10 +89,10 @@ void Run_List_Menu(struct Option_Class *Option_Class_List)
 		{
 			for(i=0;i<length;i++)
 			{
-				OLED_ShowString(startX,0+i*16,Option_Class_List[i].String,OLED_8X16);
+				OLED_ShowString_12X12(startX,0+i*12,Option_Class_List[i].String);
 				if(i==select)
 				{
-					OLED_ReverseArea(0,0+i*16,Menu_GetOptionStrLen(Option_Class_List[i].String)*8+startX*2,16);
+					OLED_ReverseArea(0,0+i*12,Menu_GetOptionStrLen(Option_Class_List[i].String)*8+startX*2,12);
 				}
 			}
 		}

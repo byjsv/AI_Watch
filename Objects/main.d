@@ -48,3 +48,4 @@
 .\objects\main.o: .\menu\Dial.h
 .\objects\main.o: .\menu\Dial_Date.h
 .\objects\main.o: .\menu\Dial_HData.h
+.\objects\main.o: .\menu\sport_mode.h

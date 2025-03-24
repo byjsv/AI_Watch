@@ -3,6 +3,7 @@
 
 #include "Dial_Date.h"
 #include "Dial_HData.h"
+#include "sport_mode.h"
 
 typedef struct {            //   按键消息结构体
 	int8_t roll;
