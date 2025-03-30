@@ -10,33 +10,12 @@
 #include "ds18b20.h"
 #include "Key.h"
 #include "MyRTC.h"
-#include "Encoder.h"
 #include "Delay.h"
+
+#include "Serial.h"
 
 #include "string.h"
 
-
-
-int8_t Dial_RollEvent(void) // 菜单滚动
-{
-	if (Key_Up_Get()) // 按键上接到PB15;
-	{
-		return 1;
-	}
-	if (Key_Down_Get()) // 按键下接到PB13;
-	{
-		return -1;
-	}
-	return Encoder_Get_Div4(); // 旋钮编码器PA8,PA9;
-}
-int8_t Dial_EnterEvent(void) // 菜单确认
-{
-	return Key_Enter_Get(); // 确认键接到PB14;
-}
-int8_t Menu_BackEvent(void) // 菜单返回
-{
-	return Key_Back_Get(); // 返回键接到PB12;
-}
 
 /****************工具函数**************/
 
@@ -123,33 +102,33 @@ void Dial_ShowText(int16_t X, int16_t Y,int16_t MaxX, int16_t MaxY, char *String
 	}
 }
 
-void Dial_ShowText_contral()
-{
-	uint8_t Roll_Event;
-	
-	while(1)
-	{
-		Roll_Event = Dial_RollEvent();
-		if(Roll_Event)
-		{
-			Roll_Event = Dial_RollEvent();
-		
-		}
-		if(Roll_Event)
-		{
-			
-			
-			//select += Roll_Event;
-			
-			
-			OLED_Clear();
-		}
-		else
-		{
-			
-		}
-	}
-}
+//void Dial_ShowText_contral()
+//{
+//	uint8_t Roll_Event;
+//	
+//	while(1)
+//	{
+//		Roll_Event = Dial_RollEvent();
+//		if(Roll_Event)
+//		{
+//			Roll_Event = Dial_RollEvent();
+//		
+//		}
+//		if(Roll_Event)
+//		{
+//			
+//			
+//			//select += Roll_Event;
+//			
+//			
+//			OLED_Clear();
+//		}
+//		else
+//		{
+//			
+//		}
+//	}
+//}
 
 
 			/***********设置选项***********/
@@ -195,46 +174,25 @@ struct Plate_class{                        //  选项结构体
 };
 
 
-
-Buttom_Message buttom = {0,0};
-
 TaskHandle_t buttomHandle;          // 按键消息句柄
 TaskHandle_t DialShow_Handle;          // 显示消息句柄
 TaskHandle_t UpdateData_Handle;          // 更新数据句柄
 
 
-void vButtomTask(void *pvParameters)
-{
-
-    while (1) {
-        // 检测按键事件
-		buttom.roll = Dial_RollEvent();
-        buttom.enter = Dial_EnterEvent();
-		if(buttom.roll!=0)
-		{
-			vTaskResume(DialShow_Handle);
-		}
-		else if(buttom.enter!=0)
-		{
-			vTaskResume(DialShow_Handle);
-		}
-
-
-        // 延时 30ms
-        vTaskDelay(pdMS_TO_TICKS(30));
-    }
-}
-
-
-
-
-
+/**
+ * @brief 菜单展示任务
+ * 
+ * @param *pvParameters  无关参数
+ * @return 无
+ * @note 特殊注意事项或限制
+ * @warning 重要警告信息
+ */
 void vDialShow_Task(void *pvParameters)
 {
+	TickType_t xLastWakeTime = xTaskGetTickCount();    //   用于绝对延时的TickType
 
 	int8_t select=0;			//	界面下标
 	uint8_t length = 0;
-	int8_t select1=0;
 	
 	struct Plate_class plate[] = {
 		{"时间",Time_Plate,Time_Plate_Exit},
@@ -249,37 +207,50 @@ void vDialShow_Task(void *pvParameters)
 	}
 	
 	while (1) {
+		
+		        // 1. 非阻塞检查按键
+        KeyEvent_t xKeyEvent;
+        if(Key_GetEvent(&xKeyEvent, 0) == pdPASS) {		//	从消息队列获取一次按键事件
+            
+			// 按下上键
+			if(xKeyEvent.Up_Pressed) {			
+				 // 调用退出函数
+				if (plate[select].func_Exit != NULL) {
+					plate[select].func_Exit();
+				}
+				
+                select--;
+				
+				//到边界循环
+				select = (select < 0) ? (length - 1) : (select % length);
+				
+				OLED_Clear();
+			}
+			
+			
+			// 	按下下键
+			if(xKeyEvent.Down_Pressed) {		
+				 // 调用退出函数
+				if (plate[select].func_Exit != NULL) {
+					plate[select].func_Exit();
+				}
+				
+                select++;
+				
+				//到边界循环
+				select = (select < 0) ? (length - 1) : (select % length);
 
-        if (buttom.roll!=0) {
-            // 取出数据
-			select1 = select;
-           
-
-            // 切换界面下标
-			select += buttom.roll;
-			
-			buttom.roll=0;
-			
-			
-			if(select > (length-1))select = 0;
-			
-			if(select < 0)select = (length-1);
-			
-			
-			 // 调用退出函数
-            if (plate[select1].func_Exit != NULL) {
-                plate[select1].func_Exit();
+				OLED_Clear();
             }
 			
-			
-			OLED_Clear();
+			// 按下中间键
+			if(xKeyEvent.Enter_Pressed) {		
+                if(plate[select].enter_func!=NULL)		//	若点击函数不为空
+				{
+					plate[select].enter_func();			//	执行点击函数
+				}
+            }
         }
-		
-		// 检测到按下事件，调用按下函数
-		if (buttom.enter!=0&&plate[select].enter_func!=NULL) {
-			buttom.enter = 0;
-			plate[select].enter_func();
-		}
 
         // 调用显示函数
         if (plate[select].func != NULL) {
@@ -292,37 +263,44 @@ void vDialShow_Task(void *pvParameters)
         OLED_Update();
 
         // 延时 30ms
-        vTaskDelay(pdMS_TO_TICKS(3));
+        vTaskDelay(pdMS_TO_TICKS(10));
     }
 }
 
-void vUpdateData(void *pvParameters)
-{
-	while(1)
-	{
-		OLED_ShowNum(127-8,0,1,1,OLED_8X16);
-		OLED_Update();
-		Sport_getData();
-		HData_SetData(DS18B20_Get_Temp(),0,0,Watch_Posture.step);
-		TaskDelay_ms(10);
-		
-	}
-}
+//void vUpdateData(void *pvParameters)
+//{
+//	while(1)
+//	{
+//		hData.temperature = 1;
+//		//Sport_getData();
+//		//HData_SetData(DS18B20_Get_Temp(),0,0,Watch_Posture.step);
+//		TaskDelay_ms(10);
+//		
+//	}
+//}
 
-
+/**
+ * @brief 用于启动任务的函数
+ * 
+ * @param 无
+ * @return 无
+ */
 void Dial_RunPlate()
 {
 	Sport_MODE_Init();
-
-
-    // 创建按键任务
-    xTaskCreate(vButtomTask, "ButtonTask", 128, NULL, 4, &buttomHandle);
-
-    // 创建显示任务
-    xTaskCreate(vDialShow_Task, "DialShowTask", 512, NULL, 3, &DialShow_Handle);
 	
-	// 创建采集数据任务
-	xTaskCreate(vUpdateData, "UpdateData", 1024, NULL, 5, &UpdateData_Handle);
+	
+	Key_Init();		// 包括了按键任务创建
+	
+	Serial_Init();
+	
+	Dial_HData_Init();		//		包括了采集数据任务的创建
+	
+	
+    // 创建显示任务
+    xTaskCreate(vDialShow_Task, "DialShowTask", configMINIMAL_STACK_SIZE, NULL, 3, &DialShow_Handle);
+	
+
 
     // 启动调度器
     vTaskStartScheduler();

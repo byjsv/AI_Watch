@@ -36,3 +36,15 @@
 .\objects\menu_show.o: menu\Dial_Date.h
 .\objects\menu_show.o: menu\Dial_HData.h
 .\objects\menu_show.o: menu\sport_mode.h
+.\objects\menu_show.o: .\Hardware\Key.h
+.\objects\menu_show.o: .\FreeRTOS\inc\freeRTOS.h
+.\objects\menu_show.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\menu_show.o: .\FreeRTOS\FreeRTOSConfig.h
+.\objects\menu_show.o: .\FreeRTOS\inc\projdefs.h
+.\objects\menu_show.o: .\FreeRTOS\inc\portable.h
+.\objects\menu_show.o: .\FreeRTOS\inc\deprecated_definitions.h
+.\objects\menu_show.o: .\FreeRTOS\port\portmacro.h
+.\objects\menu_show.o: .\FreeRTOS\inc\mpu_wrappers.h
+.\objects\menu_show.o: .\FreeRTOS\inc\queue.h
+.\objects\menu_show.o: .\FreeRTOS\inc\task.h
+.\objects\menu_show.o: .\FreeRTOS\inc\list.h

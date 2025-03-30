@@ -2,7 +2,7 @@
 #include "OLED.h"
 #include "Dial.h"
 #include "Delay.h"
-
+#include "Key.h"
 #include "MyRTC.h"
 
 void Dial_ShowSigner(uint8_t x,uint8_t y)
@@ -84,22 +84,22 @@ void Time_Plate(void)
 
 void Time_Plate_Exit(void)
 {
-	uint8_t i;
-	if(buttom.roll>0)
-	{
-		for(i=0;i<128;i++)
-		{
-			OLED_DisplayBuffMove(OLED_Left);
-			OLED_Update();
-		}
-	}
-	else if(buttom.roll<0)
-	{
-		for(i=0;i<128;i++)
-		{
-			OLED_DisplayBuffMove(OLED_Right);
-			OLED_Update();
-		}
-	}
+	//uint8_t i;
+	//if(buttom.roll>0)
+	//{
+	//	for(i=0;i<128;i++)
+	//	{
+	//		OLED_DisplayBuffMove(OLED_Left);
+	//		OLED_Update();   
+	//	}
+	//}
+	//else if(buttom.roll<0)
+	//{
+	//	for(i=0;i<128;i++)
+	//	{
+	//		OLED_DisplayBuffMove(OLED_Right);
+	//		OLED_Update();
+	//	}
+	//}
 }
 

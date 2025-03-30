@@ -35,4 +35,16 @@
 .\objects\dial_date.o: menu\Dial_HData.h
 .\objects\dial_date.o: menu\sport_mode.h
 .\objects\dial_date.o: .\System\Delay.h
+.\objects\dial_date.o: .\Hardware\Key.h
+.\objects\dial_date.o: .\FreeRTOS\inc\freeRTOS.h
+.\objects\dial_date.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\dial_date.o: .\FreeRTOS\FreeRTOSConfig.h
+.\objects\dial_date.o: .\FreeRTOS\inc\projdefs.h
+.\objects\dial_date.o: .\FreeRTOS\inc\portable.h
+.\objects\dial_date.o: .\FreeRTOS\inc\deprecated_definitions.h
+.\objects\dial_date.o: .\FreeRTOS\port\portmacro.h
+.\objects\dial_date.o: .\FreeRTOS\inc\mpu_wrappers.h
+.\objects\dial_date.o: .\FreeRTOS\inc\queue.h
+.\objects\dial_date.o: .\FreeRTOS\inc\task.h
+.\objects\dial_date.o: .\FreeRTOS\inc\list.h
 .\objects\dial_date.o: .\System\MyRTC.h

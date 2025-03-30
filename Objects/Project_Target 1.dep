@@ -895,7 +895,7 @@ I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
 F (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)()
-F (.\User\main.c)(0x67CE536D)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\User\main.c)(0x67E18801)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -939,11 +939,12 @@ I (.\FreeRTOS\inc\task.h)(0x64020E50)
 I (.\FreeRTOS\inc\list.h)(0x64020E50)
 I (.\System\MyRTC.h)(0x64A7DC14)
 I (.\Hardware\Encoder.h)(0x65B0F7AB)
-I (.\Hardware\Key.h)(0x65B0F7AB)
+I (.\Hardware\Key.h)(0x67E2B31C)
+I (.\FreeRTOS\inc\queue.h)(0x64020E50)
 I (.\Hardware\ds18b20.h)(0x67CAC8B8)
-I (.\menu\Dial.h)(0x67E0D9B2)
+I (.\menu\Dial.h)(0x67E81A92)
 I (.\menu\Dial_Date.h)(0x67CAB8D1)
-I (.\menu\Dial_HData.h)(0x67E0ED5D)
+I (.\menu\Dial_HData.h)(0x67E8C127)
 I (.\menu\sport_mode.h)(0x67E0DA3F)
 F (.\User\stm32f10x_conf.h)(0x4D99A59E)()
 F (.\User\stm32f10x_it.c)(0x67C96354)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\stm32f10x_it.o --omf_browse .\objects\stm32f10x_it.crf --depend .\objects\stm32f10x_it.d)
@@ -977,7 +978,7 @@ I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
 F (.\User\stm32f10x_it.h)(0x4D99A59E)()
-F (.\System\Delay.c)(0x67E0D857)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\delay.o --omf_browse .\objects\delay.crf --depend .\objects\delay.d)
+F (.\System\Delay.c)(0x67E78B56)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\delay.o --omf_browse .\objects\delay.crf --depend .\objects\delay.d)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -1079,7 +1080,7 @@ I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
 I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x5475F2FA)
-F (.\System\Serial.h)(0x67C52410)()
+F (.\System\Serial.h)(0x67E930CB)()
 F (.\System\GPIO.c)(0x67CD9AA9)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\gpio.o --omf_browse .\objects\gpio.crf --depend .\objects\gpio.d)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
@@ -1142,7 +1143,7 @@ I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
 F (.\Hardware\Encoder.h)(0x65B0F7AB)()
-F (.\Hardware\Key.c)(0x67CBAD34)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\key.o --omf_browse .\objects\key.crf --depend .\objects\key.d)
+F (.\Hardware\Key.c)(0x67E93798)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\key.o --omf_browse .\objects\key.crf --depend .\objects\key.d)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -1171,8 +1172,19 @@ I (.\Library\stm32f10x_tim.h)(0x4D783BB4)
 I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
-I (Hardware\Key.h)(0x65B0F7AB)
-F (.\Hardware\Key.h)(0x65B0F7AB)()
+I (.\FreeRTOS\inc\freeRTOS.h)(0x64020E50)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5475F300)
+I (.\FreeRTOS\FreeRTOSConfig.h)(0x67C99DC5)
+I (.\FreeRTOS\inc\projdefs.h)(0x64020E50)
+I (.\FreeRTOS\inc\portable.h)(0x64020E50)
+I (.\FreeRTOS\inc\deprecated_definitions.h)(0x64020E50)
+I (.\FreeRTOS\port\portmacro.h)(0x64020E50)
+I (.\FreeRTOS\inc\mpu_wrappers.h)(0x64020E50)
+I (.\FreeRTOS\inc\task.h)(0x64020E50)
+I (.\FreeRTOS\inc\list.h)(0x64020E50)
+I (Hardware\Key.h)(0x67E2B31C)
+I (.\FreeRTOS\inc\queue.h)(0x64020E50)
+F (.\Hardware\Key.h)(0x67E2B31C)()
 F (.\Hardware\OLED.c)(0x67E0E92E)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\oled.o --omf_browse .\objects\oled.crf --depend .\objects\oled.d)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
@@ -1349,7 +1361,7 @@ I (.\System\Delay.h)(0x67E0D857)
 I (.\System\GPIO.h)(0x67CD9C3C)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5475F2FE)
 F (.\Hardware\max30102.h)(0x67C9C67E)()
-F (.\menu\Dial.c)(0x67E17888)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\dial.o --omf_browse .\objects\dial.crf --depend .\objects\dial.d)
+F (.\menu\Dial.c)(0x67E93591)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\dial.o --omf_browse .\objects\dial.crf --depend .\objects\dial.d)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -1389,21 +1401,22 @@ I (.\FreeRTOS\inc\mpu_wrappers.h)(0x64020E50)
 I (.\FreeRTOS\inc\task.h)(0x64020E50)
 I (.\FreeRTOS\inc\list.h)(0x64020E50)
 I (.\FreeRTOS\inc\queue.h)(0x64020E50)
-I (menu\Dial.h)(0x67E0D9B2)
+I (menu\Dial.h)(0x67E81A92)
 I (menu\Dial_Date.h)(0x67CAB8D1)
-I (menu\Dial_HData.h)(0x67E0ED5D)
+I (menu\Dial_HData.h)(0x67E8C127)
 I (menu\sport_mode.h)(0x67E0DA3F)
 I (menu\Menu_Show.h)(0x67E0E7CF)
 I (.\Hardware\OLED.h)(0x67CDA1CF)
 I (.\Hardware\OLED_Data.h)(0x67CBB77A)
 I (.\Hardware\ds18b20.h)(0x67CAC8B8)
-I (.\Hardware\Key.h)(0x65B0F7AB)
+I (.\Hardware\Key.h)(0x67E2B31C)
 I (.\System\MyRTC.h)(0x64A7DC14)
-I (.\Hardware\Encoder.h)(0x65B0F7AB)
 I (.\System\Delay.h)(0x67E0D857)
+I (.\System\Serial.h)(0x67E930CB)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
-F (.\menu\Dial.h)(0x67E0D9B2)()
-F (.\menu\Menu_Show.c)(0x67E0EADF)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\menu_show.o --omf_browse .\objects\menu_show.crf --depend .\objects\menu_show.d)
+F (.\menu\Dial.h)(0x67E81A92)()
+F (.\menu\Menu_Show.c)(0x67E8288D)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\menu_show.o --omf_browse .\objects\menu_show.crf --depend .\objects\menu_show.d)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -1436,10 +1449,22 @@ I (menu\Menu_Show.h)(0x67E0E7CF)
 I (.\Hardware\OLED.h)(0x67CDA1CF)
 I (.\Hardware\OLED_Data.h)(0x67CBB77A)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
-I (menu\Dial.h)(0x67E0D9B2)
+I (menu\Dial.h)(0x67E81A92)
 I (menu\Dial_Date.h)(0x67CAB8D1)
-I (menu\Dial_HData.h)(0x67E0ED5D)
+I (menu\Dial_HData.h)(0x67E8C127)
 I (menu\sport_mode.h)(0x67E0DA3F)
+I (.\Hardware\Key.h)(0x67E2B31C)
+I (.\FreeRTOS\inc\freeRTOS.h)(0x64020E50)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5475F300)
+I (.\FreeRTOS\FreeRTOSConfig.h)(0x67C99DC5)
+I (.\FreeRTOS\inc\projdefs.h)(0x64020E50)
+I (.\FreeRTOS\inc\portable.h)(0x64020E50)
+I (.\FreeRTOS\inc\deprecated_definitions.h)(0x64020E50)
+I (.\FreeRTOS\port\portmacro.h)(0x64020E50)
+I (.\FreeRTOS\inc\mpu_wrappers.h)(0x64020E50)
+I (.\FreeRTOS\inc\queue.h)(0x64020E50)
+I (.\FreeRTOS\inc\task.h)(0x64020E50)
+I (.\FreeRTOS\inc\list.h)(0x64020E50)
 F (.\menu\Menu_Show.h)(0x67E0E7CF)()
 F (.\menu\Menu_Show_Data.c)(0x67E0EA1C)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\menu_show_data.o --omf_browse .\objects\menu_show_data.crf --depend .\objects\menu_show_data.d)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
@@ -1473,7 +1498,7 @@ I (.\Library\misc.h)(0x4D783BB4)
 I (menu\Menu_Show.h)(0x67E0E7CF)
 F (.\menu\Parising_menu.h)(0x67C15499)()
 F (.\menu\Parsing_menu.c)(0x67B97A90)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\parsing_menu.o --omf_browse .\objects\parsing_menu.crf --depend .\objects\parsing_menu.d)
-F (.\menu\Dial_Date.c)(0x67CDA329)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\dial_date.o --omf_browse .\objects\dial_date.crf --depend .\objects\dial_date.d)
+F (.\menu\Dial_Date.c)(0x67E8213B)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\dial_date.o --omf_browse .\objects\dial_date.crf --depend .\objects\dial_date.d)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -1504,11 +1529,23 @@ I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
 I (.\Hardware\OLED.h)(0x67CDA1CF)
 I (.\Hardware\OLED_Data.h)(0x67CBB77A)
-I (menu\Dial.h)(0x67E0D9B2)
+I (menu\Dial.h)(0x67E81A92)
 I (menu\Dial_Date.h)(0x67CAB8D1)
-I (menu\Dial_HData.h)(0x67E0ED5D)
+I (menu\Dial_HData.h)(0x67E8C127)
 I (menu\sport_mode.h)(0x67E0DA3F)
 I (.\System\Delay.h)(0x67E0D857)
+I (.\Hardware\Key.h)(0x67E2B31C)
+I (.\FreeRTOS\inc\freeRTOS.h)(0x64020E50)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5475F300)
+I (.\FreeRTOS\FreeRTOSConfig.h)(0x67C99DC5)
+I (.\FreeRTOS\inc\projdefs.h)(0x64020E50)
+I (.\FreeRTOS\inc\portable.h)(0x64020E50)
+I (.\FreeRTOS\inc\deprecated_definitions.h)(0x64020E50)
+I (.\FreeRTOS\port\portmacro.h)(0x64020E50)
+I (.\FreeRTOS\inc\mpu_wrappers.h)(0x64020E50)
+I (.\FreeRTOS\inc\queue.h)(0x64020E50)
+I (.\FreeRTOS\inc\task.h)(0x64020E50)
+I (.\FreeRTOS\inc\list.h)(0x64020E50)
 I (.\System\MyRTC.h)(0x64A7DC14)
 F (.\menu\Dial_Date.h)(0x67CAB8D1)()
 F (.\menu\Dial_Weather.c)(0x67CADBB0)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\dial_weather.o --omf_browse .\objects\dial_weather.crf --depend .\objects\dial_weather.d)
@@ -1541,7 +1578,7 @@ I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
 F (.\menu\Dial_Weather.h)(0x67CAC8B8)()
-F (.\menu\Dial_HData.c)(0x67E0ED5D)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\dial_hdata.o --omf_browse .\objects\dial_hdata.crf --depend .\objects\dial_hdata.d)
+F (.\menu\Dial_HData.c)(0x67E93798)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\dial_hdata.o --omf_browse .\objects\dial_hdata.crf --depend .\objects\dial_hdata.d)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -1573,8 +1610,23 @@ I (.\Library\misc.h)(0x4D783BB4)
 I (.\Hardware\OLED.h)(0x67CDA1CF)
 I (.\Hardware\OLED_Data.h)(0x67CBB77A)
 I (.\Hardware\ds18b20.h)(0x67CAC8B8)
-I (menu\Dial_HData.h)(0x67E0ED5D)
-F (.\menu\Dial_HData.h)(0x67E0ED5D)()
+I (menu\Dial_HData.h)(0x67E8C127)
+I (.\FreeRTOS\inc\freeRTOS.h)(0x64020E50)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5475F300)
+I (.\FreeRTOS\FreeRTOSConfig.h)(0x67C99DC5)
+I (.\FreeRTOS\inc\projdefs.h)(0x64020E50)
+I (.\FreeRTOS\inc\portable.h)(0x64020E50)
+I (.\FreeRTOS\inc\deprecated_definitions.h)(0x64020E50)
+I (.\FreeRTOS\port\portmacro.h)(0x64020E50)
+I (.\FreeRTOS\inc\mpu_wrappers.h)(0x64020E50)
+I (.\FreeRTOS\inc\task.h)(0x64020E50)
+I (.\FreeRTOS\inc\list.h)(0x64020E50)
+I (.\System\Delay.h)(0x67E0D857)
+I (menu\sport_mode.h)(0x67E0DA3F)
+I (.\System\Serial.h)(0x67E930CB)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
+I (.\FreeRTOS\inc\queue.h)(0x64020E50)
+F (.\menu\Dial_HData.h)(0x67E8C127)()
 F (.\menu\sport_mode.c)(0x67E0DA75)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I.\Start -I.\User -I.\Library -I.\FreeRTOS -I.\FreeRTOS\inc -I.\FreeRTOS\port -I.\FreeRTOS\src -I.\System -I.\Hardware -I.\menu -I.\MPU6050 -I.\AIR780E-I C:\Users\12748\Desktop\workplace\AI_Watch\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="514" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\sport_mode.o --omf_browse .\objects\sport_mode.crf --depend .\objects\sport_mode.d)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
@@ -1800,6 +1852,6 @@ I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (.\System\Delay.h)(0x67E0D857)
 I (.\Hardware\OLED.h)(0x67CDA1CF)
 I (.\Hardware\OLED_Data.h)(0x67CBB77A)
-I (.\System\Serial.h)(0x67C52410)
+I (.\System\Serial.h)(0x67E930CB)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
 I (AIR780E\Air780E.h)(0x67C69979)

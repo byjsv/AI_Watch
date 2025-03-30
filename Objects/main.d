@@ -44,6 +44,7 @@
 .\objects\main.o: .\System\MyRTC.h
 .\objects\main.o: .\Hardware\Encoder.h
 .\objects\main.o: .\Hardware\Key.h
+.\objects\main.o: .\FreeRTOS\inc\queue.h
 .\objects\main.o: .\Hardware\ds18b20.h
 .\objects\main.o: .\menu\Dial.h
 .\objects\main.o: .\menu\Dial_Date.h

@@ -1,16 +1,17 @@
 #ifndef __DIAL_HDATA_H
 #define __DIAL_HDATA_H
 
-struct healthData{
+typedef struct {
 	short temperature;
 	uint8_t HRate;
 	uint8_t OxRate;
 	uint32_t DailyStep;
-};
+}healthData;
 
+void Dial_HData_Init(void);
 
-extern struct healthData hData;
 void Health_Plate(void);
-void HData_SetData(short temperature,uint8_t HRate,uint8_t OxRate,uint32_t DailyStep);
+
+void vUpdateData(void *pvParameters);
 
 #endif

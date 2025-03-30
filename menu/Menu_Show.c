@@ -4,6 +4,7 @@
 #include "string.h"
 
 #include "Dial.h"
+#include "Key.h"
 
 #define Screen_Length_Menu 4
 
@@ -49,29 +50,32 @@ void Run_List_Menu(struct Option_Class *Option_Class_List)
 	
 	while(1)
 	{
-		if(buttom.roll!=0)		//  触发移动
-		{
+		KeyEvent_t xKeyEvent;
+        if(Key_GetEvent(&xKeyEvent, 0) == pdPASS) {		//	从消息队列获取一次按键事件
+            
+			// 按下上键
+			if(xKeyEvent.Up_Pressed) {	
+				
+				select--;		// 选项上移
+				select = (select < 0) ? (length - 1) : (select % length);	//到边界循环
+			}
+			// 	按下下键
+			if(xKeyEvent.Down_Pressed) {	
+				
+				select++;		// 选项下移
+				select = (select < 0) ? (length - 1) : (select % length);	//到边界循环
+			}
+			// 按下中间键
+			if(xKeyEvent.Enter_Pressed) {	
+				if(select==0)break;
+				if(Option_Class_List[select].func != NULL)
+				{
+					Option_Class_List[select].func();
+				}
+			}
 			
-			
-			// 切换界面下标
-			select += buttom.roll;
-			
-			buttom.roll=0;
-			
-			
-			if(select > (length-1))select = 0;
-			
-			if(select < 0)select = (length-1);
 		}
 		
-		//  触发按下事件
-		if(buttom.enter == 1&&select==0)break;
-		
-		if(buttom.enter != 0 && Option_Class_List[select].func != NULL)
-		{
-			Option_Class_List[select].func();
-			buttom.enter=0;
-		}
 		
 		if(select>Screen_Length_Menu)           // 达到菜单偏移的临界值
 		{

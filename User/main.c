@@ -56,7 +56,7 @@ int main(void)
 	test_Dial_RunPlate();
 	
 	//xTaskCreate(myTask,"myTask",512,NULL,2,&myTaskHandler);
-	vTaskStartScheduler();
+	//vTaskStartScheduler();
 	while (1)
 	{
 		

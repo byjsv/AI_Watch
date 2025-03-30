@@ -75,7 +75,7 @@ void delay_init(void)
 
 void TaskDelay_ms(uint32_t xms)
 {
-	vTaskDelay(xms);
+	vTaskDelay(pdMS_TO_TICKS(xms));
 }
 
 
