@@ -71,6 +71,9 @@
 #define REG_REV_ID 0xFE
 #define REG_PART_ID 0xFF
 
+extern uint8_t display_hr;
+extern uint8_t display_spO2;
+
 
 //IIC所有操作函数
 void MAX30102_IIC_Init(void);                //初始化IIC的IO口				 
@@ -107,6 +110,11 @@ void maxim_peaks_above_min_height( int32_t *pn_locs, int32_t *pn_npks,  int32_t 
 void maxim_remove_close_peaks( int32_t *pn_locs, int32_t *pn_npks,   int32_t  *pn_x, int32_t n_min_distance );
 void maxim_sort_ascend( int32_t *pn_x, int32_t n_size );
 void maxim_sort_indices_descend(  int32_t  *pn_x, int32_t *pn_indx, int32_t n_size);
+
+void System_Init(void);
+void Sensor_Init(void);
+void Collect_Initial_Samples(void);
+void Process_Sensor_Data(void);
 
 #endif
 

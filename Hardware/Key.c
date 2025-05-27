@@ -20,13 +20,13 @@ QueueHandle_t xKeyQueue;
  */
 void Key_Init(void)
 {
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
     
     GPIO_InitTypeDef GPIO_InitStructure;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14 | GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_15;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
     
     // 创建按键事件队列，最多存储1个事件
     xKeyQueue = xQueueCreate(1, sizeof(KeyEvent_t));
@@ -52,51 +52,40 @@ void vKeyScanTask(void *pvParameters)
     while (1)
     {
         xKeyEvent.Enter_Pressed = 0;
-        xKeyEvent.Back_Pressed = 0;
         xKeyEvent.Up_Pressed = 0;
         xKeyEvent.Down_Pressed = 0;
         
         // 扫描Enter键(PB14)
-        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_14) == 0)
+        if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_1) == 0)
         {
             vTaskDelay(pdMS_TO_TICKS(STAY_TIME));
-            if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_14) == 0)
+            if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_1) == 0)
             {
                 xKeyEvent.Enter_Pressed = 1;
             }
         }
         
-        // 扫描Back键(PB12)
-        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_12) == 0)
-        {
-            vTaskDelay(pdMS_TO_TICKS(STAY_TIME));
-            if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_12) == 0)
-            {
-                xKeyEvent.Back_Pressed = 1;
-            }
-        }
-        
         // 扫描Up键(PB15)
-        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_15) == 0)
+        if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_2) == 0)
         {
             vTaskDelay(pdMS_TO_TICKS(STAY_TIME));
-            if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_15) == 0)
+            if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_2) == 0)
             {
                 xKeyEvent.Up_Pressed = 1;
             }
         }
         
         // 扫描Down键(PB13)
-        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_13) == 0)
+        if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0) == 0)
         {
             vTaskDelay(pdMS_TO_TICKS(STAY_TIME));
-            if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_13) == 0)
+            if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0) == 0)
             {
                 xKeyEvent.Down_Pressed = 1;
             }
         }
         
-        if (xKeyEvent.Enter_Pressed || xKeyEvent.Back_Pressed || 
+        if (xKeyEvent.Enter_Pressed || 
             xKeyEvent.Up_Pressed || xKeyEvent.Down_Pressed)
         {
             xQueueSend(xKeyQueue, &xKeyEvent, 0);

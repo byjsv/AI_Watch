@@ -29,3 +29,6 @@
 .\objects\menu_show_data.o: .\Library\stm32f10x_wwdg.h
 .\objects\menu_show_data.o: .\Library\misc.h
 .\objects\menu_show_data.o: menu\Menu_Show.h
+.\objects\menu_show_data.o: menu\Dial_Date.h
+.\objects\menu_show_data.o: menu\Dial_HData.h
+.\objects\menu_show_data.o: menu\sport_mode.h

@@ -49,6 +49,7 @@
 ".\objects\w25q64.o"
 ".\objects\ds18b20.o"
 ".\objects\max30102.o"
+".\objects\max30102read.o"
 ".\objects\dial.o"
 ".\objects\menu_show.o"
 ".\objects\menu_show_data.o"

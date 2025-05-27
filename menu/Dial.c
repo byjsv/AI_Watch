@@ -138,6 +138,13 @@ void Show_Setting()
 
 }
 
+void Show_APP()
+{
+	uint8_t wide = 50;
+	uint8_t high = 36;
+	OLED_ShowImage((127-wide)/2,(64-high)/2+10,wide,high,whale);
+
+}
 
 void Dial_ShowData(uint8_t temp,uint8_t HRate, uint8_t Oxygen)
 {
@@ -197,6 +204,7 @@ void vDialShow_Task(void *pvParameters)
 	struct Plate_class plate[] = {
 		{"时间",Time_Plate,Time_Plate_Exit},
 		{"",Health_Plate,Health_Plate_Exit,HealthMenu},
+		{"功能",Show_APP,NULL_Func,FunctionMenu},
 		{"设置",Show_Setting,NULL_Func,SettingMenu},
 		{".."}
 	};
@@ -298,7 +306,7 @@ void Dial_RunPlate()
 	
 	
     // 创建显示任务
-    xTaskCreate(vDialShow_Task, "DialShowTask", configMINIMAL_STACK_SIZE, NULL, 3, &DialShow_Handle);
+    xTaskCreate(vDialShow_Task, "DialShowTask", configMINIMAL_STACK_SIZE*3, NULL, 3, &DialShow_Handle);
 	
 
 

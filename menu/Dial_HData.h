@@ -10,6 +10,10 @@ typedef struct {
 
 void Dial_HData_Init(void);
 
+void Dial_HData_Line_Temp(void);
+void Dial_HData_Line_HRate(void);
+void Dial_HData_Line_OxRate(void);
+
 void Health_Plate(void);
 
 void vUpdateData(void *pvParameters);

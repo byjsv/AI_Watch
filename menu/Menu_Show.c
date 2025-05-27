@@ -2,12 +2,12 @@
 #include "Menu_Show.h"
 #include "OLED.h"
 #include "string.h"
-
+#include "W25Q64.h"
 #include "Dial.h"
 #include "Key.h"
+#include "Delay.h"
 
 #define Screen_Length_Menu 4
-
 
 struct Option_Class Option_Class_List[] = {
 	{">>>"},
@@ -32,6 +32,54 @@ uint8_t Menu_GetOptionStrLen(char *String)
 		}
 	}
 	return len;
+}
+
+void set_Bright(void)
+{
+	OLED_Clear();
+	while(1)
+	{
+		KeyEvent_t xKeyEvent;
+        if(Key_GetEvent(&xKeyEvent, 0) == pdPASS) {		//	从消息队列获取一次按键事件
+            
+			// 按下上键
+			if(xKeyEvent.Up_Pressed) {	
+				OLED_Bright+=3;
+				OLED_SetContrast(OLED_Bright);
+			}
+			// 	按下下键
+			if(xKeyEvent.Down_Pressed) {	
+				OLED_Bright-=3;
+				OLED_SetContrast(OLED_Bright);
+			}
+			// 按下中间键
+			if(xKeyEvent.Enter_Pressed) {	
+				OLED_SetContrast(OLED_Bright);
+				break;
+			}
+		}
+		OLED_ShowNum_Left(76,24,OLED_Bright,3,OLED_8X16);
+		OLED_ShowString_12X12(30,28,"Gamma:");
+		OLED_Update();
+	}
+}
+
+void Clear_Data(void)
+{
+	OLED_Clear();
+	uint32_t address;
+	for(address = 99583;address<99853+100*256;address+=256)
+	{
+		OLED_ShowNum_Left(44,24,address,8,OLED_8X16);
+		OLED_ShowString_12X12(10,28,"Wait");
+		OLED_Update();
+		//W25Q64_PageErase(address);
+		Delay_ms(3);
+	}
+	OLED_Clear();
+	OLED_ShowString_12X12(20,28,"Success");
+	OLED_Update();
+	Delay_ms(1000);
 }
 
 void Run_List_Menu(struct Option_Class *Option_Class_List)

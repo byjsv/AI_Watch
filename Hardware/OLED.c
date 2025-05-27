@@ -19,6 +19,8 @@
 uint8_t OLED_DisplayBuf[8][128];
 uint8_t OLED_DisplayBuf1[8][128];
 
+uint8_t OLED_Bright = 207;
+
 
 
 /*********************全局变量*/
@@ -219,6 +221,7 @@ void OLED_Init(void)
 	
 	OLED_WriteCommand(0x81);	//设置对比度
 	OLED_WriteCommand(0xCF);	//0x00~0xFF
+
 
 	OLED_WriteCommand(0xD9);	//设置预充电周期
 	OLED_WriteCommand(0xF1);
@@ -1647,7 +1650,133 @@ uint8_t OLED_ShowString_Length(int16_t X, int16_t Y, char *String, uint8_t FontS
 	return string_length;
 }
 
-void OLED_ShowString_Line(int16_t X, int16_t Y, char *String, uint8_t FontSize)
+void OLED_ShowString_Line(int16_t X, int16_t Y, char *String)
+//{
+//	uint16_t i = 0;
+//	char SingleChar[5];
+//	uint8_t CharLength = 0;
+//	uint16_t XOffset = 0;
+//	uint16_t pIndex;
+//	
+//	while (String[i] != '\0')	//遍历字符串
+//	{
+//		
+//#ifdef OLED_CHARSET_UTF8						//定义字符集为UTF8
+//		/*此段代码的目的是，提取UTF8字符串中的一个字符，转存到SingleChar子字符串中*/
+//		/*判断UTF8编码第一个字节的标志位*/
+//		if ((String[i] & 0x80) == 0x00)			//第一个字节为0xxxxxxx
+//		{
+//			CharLength = 1;						//字符为1字节
+//			SingleChar[0] = String[i ++];		//将第一个字节写入SingleChar第0个位置，随后i指向下一个字节
+//			SingleChar[1] = '\0';				//为SingleChar添加字符串结束标志位
+//		}
+//		else if ((String[i] & 0xE0) == 0xC0)	//第一个字节为110xxxxx
+//		{
+//			CharLength = 2;						//字符为2字节
+//			SingleChar[0] = String[i ++];		//将第一个字节写入SingleChar第0个位置，随后i指向下一个字节
+//			if (String[i] == '\0') {break;}		//意外情况，跳出循环，结束显示
+//			SingleChar[1] = String[i ++];		//将第二个字节写入SingleChar第1个位置，随后i指向下一个字节
+//			SingleChar[2] = '\0';				//为SingleChar添加字符串结束标志位
+//		}
+//		else if ((String[i] & 0xF0) == 0xE0)	//第一个字节为1110xxxx
+//		{
+//			CharLength = 3;						//字符为3字节
+//			SingleChar[0] = String[i ++];
+//			if (String[i] == '\0') {break;}
+//			SingleChar[1] = String[i ++];
+//			if (String[i] == '\0') {break;}
+//			SingleChar[2] = String[i ++];
+//			SingleChar[3] = '\0';
+//		}
+//		else if ((String[i] & 0xF8) == 0xF0)	//第一个字节为11110xxx
+//		{
+//			CharLength = 4;						//字符为4字节
+//			SingleChar[0] = String[i ++];
+//			if (String[i] == '\0') {break;}
+//			SingleChar[1] = String[i ++];
+//			if (String[i] == '\0') {break;}
+//			SingleChar[2] = String[i ++];
+//			if (String[i] == '\0') {break;}
+//			SingleChar[3] = String[i ++];
+//			SingleChar[4] = '\0';
+//		}
+//		else
+//		{
+//			i ++;			//意外情况，i指向下一个字节，忽略此字节，继续判断下一个字节
+//			continue;
+//		}
+//#endif
+//		
+//#ifdef OLED_CHARSET_GB2312						//定义字符集为GB2312
+//		/*此段代码的目的是，提取GB2312字符串中的一个字符，转存到SingleChar子字符串中*/
+//		/*判断GB2312字节的最高位标志位*/
+//		if ((String[i] & 0x80) == 0x00)			//最高位为0
+//		{
+//			CharLength = 1;						//字符为1字节
+//			SingleChar[0] = String[i ++];		//将第一个字节写入SingleChar第0个位置，随后i指向下一个字节
+//			SingleChar[1] = '\0';				//为SingleChar添加字符串结束标志位
+//		}
+//		else									//最高位为1
+//		{
+//			CharLength = 2;						//字符为2字节
+//			SingleChar[0] = String[i ++];		//将第一个字节写入SingleChar第0个位置，随后i指向下一个字节
+//			if (String[i] == '\0') {break;}		//意外情况，跳出循环，结束显示
+//			SingleChar[1] = String[i ++];		//将第二个字节写入SingleChar第1个位置，随后i指向下一个字节
+//			SingleChar[2] = '\0';				//为SingleChar添加字符串结束标志位
+//		}
+//#endif
+//		if(XOffset+FontSize > 127 && !(CharLength == 1 && SingleChar[0]=='\n'))         //    缺字显示
+//		{
+//			XOffset = 0;
+//			Y += (FontSize==OLED_6X8)?8:16;
+//		}
+//		
+//		/*显示上述代码提取到的SingleChar*/
+//		if (CharLength == 1)	//如果是单字节字符
+//		{
+//			if(SingleChar[0]=='\n')         //   解析到\n换行操作
+//			{
+//				XOffset = 0;
+//				Y += (FontSize==OLED_6X8)?8:16;
+//			}
+//			else if(SingleChar[0]=='\r')
+//			{
+//				
+//			}
+//			else
+//			{
+//				/*使用OLED_ShowChar显示此字符*/
+//				OLED_ShowChar(X + XOffset, Y, SingleChar[0], FontSize);
+//				XOffset += FontSize;
+//			}
+//		}
+//		else					//否则，即多字节字符
+//		{
+//			/*遍历整个字模库，从字模库中寻找此字符的数据*/
+//			/*如果找到最后一个字符（定义为空字符串），则表示字符未在字模库定义，停止寻找*/
+//			for (pIndex = 0; strcmp(OLED_CF16x16[pIndex].Index, "") != 0; pIndex ++)
+//			{
+//				/*找到匹配的字符*/
+//				if (strcmp(OLED_CF16x16[pIndex].Index, SingleChar) == 0)
+//				{
+//					break;		//跳出循环，此时pIndex的值为指定字符的索引
+//				}
+//			}
+//			if (FontSize == OLED_8X16)		//给定字体为8*16点阵
+//			{
+//				/*将字模库OLED_CF16x16的指定数据以16*16的图像格式显示*/
+//				OLED_ShowImage(X + XOffset, Y, 16, 16, OLED_CF16x16[pIndex].Data);
+//				XOffset += 16;
+//			}
+//			else if (FontSize == OLED_6X8)	//给定字体为6*8点阵
+//			{
+//				/*空间不足，此位置显示'?'*/
+//				OLED_ShowChar(X + XOffset, Y, '?', OLED_6X8);
+//				XOffset += OLED_6X8;
+//			}
+//		}
+//	}
+//}
 {
 	uint16_t i = 0;
 	char SingleChar[5];
@@ -1658,53 +1787,8 @@ void OLED_ShowString_Line(int16_t X, int16_t Y, char *String, uint8_t FontSize)
 	while (String[i] != '\0')	//遍历字符串
 	{
 		
-#ifdef OLED_CHARSET_UTF8						//定义字符集为UTF8
-		/*此段代码的目的是，提取UTF8字符串中的一个字符，转存到SingleChar子字符串中*/
-		/*判断UTF8编码第一个字节的标志位*/
-		if ((String[i] & 0x80) == 0x00)			//第一个字节为0xxxxxxx
-		{
-			CharLength = 1;						//字符为1字节
-			SingleChar[0] = String[i ++];		//将第一个字节写入SingleChar第0个位置，随后i指向下一个字节
-			SingleChar[1] = '\0';				//为SingleChar添加字符串结束标志位
-		}
-		else if ((String[i] & 0xE0) == 0xC0)	//第一个字节为110xxxxx
-		{
-			CharLength = 2;						//字符为2字节
-			SingleChar[0] = String[i ++];		//将第一个字节写入SingleChar第0个位置，随后i指向下一个字节
-			if (String[i] == '\0') {break;}		//意外情况，跳出循环，结束显示
-			SingleChar[1] = String[i ++];		//将第二个字节写入SingleChar第1个位置，随后i指向下一个字节
-			SingleChar[2] = '\0';				//为SingleChar添加字符串结束标志位
-		}
-		else if ((String[i] & 0xF0) == 0xE0)	//第一个字节为1110xxxx
-		{
-			CharLength = 3;						//字符为3字节
-			SingleChar[0] = String[i ++];
-			if (String[i] == '\0') {break;}
-			SingleChar[1] = String[i ++];
-			if (String[i] == '\0') {break;}
-			SingleChar[2] = String[i ++];
-			SingleChar[3] = '\0';
-		}
-		else if ((String[i] & 0xF8) == 0xF0)	//第一个字节为11110xxx
-		{
-			CharLength = 4;						//字符为4字节
-			SingleChar[0] = String[i ++];
-			if (String[i] == '\0') {break;}
-			SingleChar[1] = String[i ++];
-			if (String[i] == '\0') {break;}
-			SingleChar[2] = String[i ++];
-			if (String[i] == '\0') {break;}
-			SingleChar[3] = String[i ++];
-			SingleChar[4] = '\0';
-		}
-		else
-		{
-			i ++;			//意外情况，i指向下一个字节，忽略此字节，继续判断下一个字节
-			continue;
-		}
-#endif
 		
-#ifdef OLED_CHARSET_GB2312						//定义字符集为GB2312
+		OLED_CHARSET_GB2312						//定义字符集为GB2312
 		/*此段代码的目的是，提取GB2312字符串中的一个字符，转存到SingleChar子字符串中*/
 		/*判断GB2312字节的最高位标志位*/
 		if ((String[i] & 0x80) == 0x00)			//最高位为0
@@ -1721,56 +1805,67 @@ void OLED_ShowString_Line(int16_t X, int16_t Y, char *String, uint8_t FontSize)
 			SingleChar[1] = String[i ++];		//将第二个字节写入SingleChar第1个位置，随后i指向下一个字节
 			SingleChar[2] = '\0';				//为SingleChar添加字符串结束标志位
 		}
-#endif
-		if(XOffset+FontSize > 127 && !(CharLength == 1 && SingleChar[0]=='\n'))         //    缺字显示
+		if(XOffset+6 > 127 && !(CharLength == 1 && SingleChar[0]=='\n'))         //    缺字显示
 		{
 			XOffset = 0;
-			Y += (FontSize==OLED_6X8)?8:16;
+			Y += 12;
 		}
-		
 		/*显示上述代码提取到的SingleChar*/
 		if (CharLength == 1)	//如果是单字节字符
 		{
-			if(SingleChar[0]=='\n')         //   解析到\n换行操作
-			{
-				XOffset = 0;
-				Y += (FontSize==OLED_6X8)?8:16;
-			}
-			else if(SingleChar[0]=='\r')
-			{
-				
-			}
-			else
-			{
-				/*使用OLED_ShowChar显示此字符*/
-				OLED_ShowChar(X + XOffset, Y, SingleChar[0], FontSize);
-				XOffset += FontSize;
-			}
+			/*使用OLED_ShowChar显示此字符*/
+			OLED_ShowChar(X + XOffset, Y+2, SingleChar[0], OLED_6X8);
+			XOffset += 6;
 		}
 		else					//否则，即多字节字符
 		{
 			/*遍历整个字模库，从字模库中寻找此字符的数据*/
 			/*如果找到最后一个字符（定义为空字符串），则表示字符未在字模库定义，停止寻找*/
-			for (pIndex = 0; strcmp(OLED_CF16x16[pIndex].Index, "") != 0; pIndex ++)
+			for (pIndex = 0; strcmp(OLED_CF12x12[pIndex].Index, "") != 0; pIndex ++)
 			{
 				/*找到匹配的字符*/
-				if (strcmp(OLED_CF16x16[pIndex].Index, SingleChar) == 0)
+				if (strcmp(OLED_CF12x12[pIndex].Index, SingleChar) == 0)
 				{
 					break;		//跳出循环，此时pIndex的值为指定字符的索引
 				}
 			}
-			if (FontSize == OLED_8X16)		//给定字体为8*16点阵
-			{
-				/*将字模库OLED_CF16x16的指定数据以16*16的图像格式显示*/
-				OLED_ShowImage(X + XOffset, Y, 16, 16, OLED_CF16x16[pIndex].Data);
-				XOffset += 16;
-			}
-			else if (FontSize == OLED_6X8)	//给定字体为6*8点阵
-			{
-				/*空间不足，此位置显示'?'*/
-				OLED_ShowChar(X + XOffset, Y, '?', OLED_6X8);
-				XOffset += OLED_6X8;
-			}
+			/*将字模库OLED_CF16x16的指定数据以12*12的图像格式显示*/
+			OLED_ShowImage(X + XOffset, Y, 12, 12, OLED_CF12x12[pIndex].Data);
+			XOffset += 12;
+			
 		}
 	}
+}
+
+/**
+  * 函    数：OLED设置对比度/亮度
+  * 参    数：contrast 对比度值，范围：0x00~0xFF
+  * 返 回 值：无
+  * 说    明：值越大，显示越亮
+  */
+void OLED_SetContrast(uint8_t contrast)
+{
+    OLED_WriteCommand(0x81);     // 设置对比度控制命令
+    OLED_WriteCommand(contrast); // 设置对比度值(0-255)
+}
+
+/**
+  * 函    数：OLED设置亮度级别
+  * 参    数：level 亮度级别，范围：0~100
+  * 返 回 值：无
+  * 说    明：将0-100线性映射到0x00-0xFF
+  */
+void OLED_SetBrightness(uint8_t level)
+{
+    // 将0-100的亮度级别映射到0x00-0xFF的对比度值
+    uint8_t contrast;
+    if(level > 100) level = 100;
+    
+    // 线性映射
+    contrast = (uint8_t)((level * 255) / 100);
+    
+    // 非线性映射（更符合人眼感知）
+    // contrast = (uint8_t)(pow((float)level/100.0f, 1.5f) * 255);
+    
+    OLED_SetContrast(contrast);
 }

@@ -30,3 +30,7 @@
 .\objects\w25q64.o: .\Library\misc.h
 .\objects\w25q64.o: Hardware\MySPI.h
 .\objects\w25q64.o: Hardware\W25Q64_Ins.h
+.\objects\w25q64.o: Hardware\W25Q64.h
+.\objects\w25q64.o: Hardware\OLED.h
+.\objects\w25q64.o: Hardware\OLED_Data.h
+.\objects\w25q64.o: .\System\delay.h

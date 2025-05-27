@@ -32,6 +32,7 @@
 .\objects\menu_show.o: .\Hardware\OLED.h
 .\objects\menu_show.o: .\Hardware\OLED_Data.h
 .\objects\menu_show.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\menu_show.o: .\Hardware\W25Q64.h
 .\objects\menu_show.o: menu\Dial.h
 .\objects\menu_show.o: menu\Dial_Date.h
 .\objects\menu_show.o: menu\Dial_HData.h
@@ -48,3 +49,4 @@
 .\objects\menu_show.o: .\FreeRTOS\inc\queue.h
 .\objects\menu_show.o: .\FreeRTOS\inc\task.h
 .\objects\menu_show.o: .\FreeRTOS\inc\list.h
+.\objects\menu_show.o: .\System\Delay.h

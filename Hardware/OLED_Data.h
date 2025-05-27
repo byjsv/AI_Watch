@@ -65,6 +65,7 @@ extern const uint8_t OxRate[];
 extern const uint8_t fire[];
 extern const uint8_t step[];
 extern const uint8_t barbell[];
+extern const uint8_t whale[];
 /*按照上面的格式，在这个位置加入新的图像数据声明*/
 //...
 

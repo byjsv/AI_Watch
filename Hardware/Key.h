@@ -13,7 +13,6 @@
 /* 按键事件结构体 - 只在头文件中定义一次 */
 typedef struct {
     uint8_t Enter_Pressed;  // 确认键按下
-    uint8_t Back_Pressed;   // 返回键按下
     uint8_t Up_Pressed;     // 上键按下
     uint8_t Down_Pressed;   // 下键按下
 } KeyEvent_t;

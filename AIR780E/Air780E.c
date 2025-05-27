@@ -46,7 +46,7 @@ uint8_t AT_SendCommand(char* command,char *Response, uint16_t timeout, uint8_t R
 	}
     
 	OLED_Clear();
-	OLED_ShowString_Line(0,0,command,OLED_8X16);
+	OLED_ShowString_Line(0,0,command);
     
     for(i=0;i<Retry;i++)
 	{
@@ -56,7 +56,7 @@ uint8_t AT_SendCommand(char* command,char *Response, uint16_t timeout, uint8_t R
 				if (strstr(Serial_RxPacket, Response) != NULL) {
 					Serial_RxFlag = 0;
 					
-					OLED_ShowString_Line(0,16,Serial_RxPacket,OLED_6X8);
+					OLED_ShowString_Line(0,16,Serial_RxPacket);
 					
 					return Success; // 成功接收到 "OK"
 				}
@@ -90,7 +90,7 @@ uint8_t AT_SendCommand_2(char* command,char *Response, char *Response2, uint16_t
 	}
     
 	OLED_Clear();
-    OLED_ShowString_Line(0,0,command,OLED_8X16);
+    OLED_ShowString_Line(0,0,command);
 	
     for(i=0;i<Retry;i++)
 	{
@@ -100,7 +100,7 @@ uint8_t AT_SendCommand_2(char* command,char *Response, char *Response2, uint16_t
 				if (strstr(Serial_RxPacket, Response) != NULL && strstr(Serial_RxPacket, Response2) != NULL)
 				{
 					
-					OLED_ShowString_Line(0,16,Serial_RxPacket,OLED_6X8);
+					OLED_ShowString_Line(0,16,Serial_RxPacket);
 					Serial_RxFlag = 0;
 					
 					return Success; // 成功接收到 "OK"

@@ -48,3 +48,5 @@
 .\objects\dial_date.o: .\FreeRTOS\inc\task.h
 .\objects\dial_date.o: .\FreeRTOS\inc\list.h
 .\objects\dial_date.o: .\System\MyRTC.h
+.\objects\dial_date.o: menu\Menu_Show.h
+.\objects\dial_date.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

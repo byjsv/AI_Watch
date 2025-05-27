@@ -5,6 +5,13 @@
 #include "Key.h"
 #include "MyRTC.h"
 
+#include "Menu_Show.h"
+#include "OLED.h"
+#include "string.h"
+
+#include "Dial.h"
+#include "Key.h"
+
 void Dial_ShowSigner(uint8_t x,uint8_t y)
 {
 	//OLED_ShowString(x,y,"4G",OLED_6X8);
@@ -40,6 +47,24 @@ void Show_large_num(uint8_t X,uint8_t Y,uint8_t n)
 	}
 }
 
+uint8_t getDaysInMonth(uint16_t year, uint8_t month) {
+    // 判断月份并返回天数
+    switch (month) {
+        case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+            return 31;
+        case 4: case 6: case 9: case 11:
+            return 30;
+        case 2:
+            // 判断闰年
+            if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+                return 29; // 闰年2月有29天
+            } else {
+                return 28; // 平年2月有28天
+            }
+    }
+	return 31;
+}
+
 void Dial_ShowDate(uint8_t PosX,uint8_t PosY,uint16_t year,uint8_t month,uint8_t day,uint8_t FontSize)
 {
 	uint8_t space = 3;
@@ -50,7 +75,10 @@ void Dial_ShowDate(uint8_t PosX,uint8_t PosY,uint16_t year,uint8_t month,uint8_t
 	length += get_Num_Len(year)*FontSize + space;
 	OLED_ShowNum_Left(PosX + length,PosY,month,get_Num_Len(month),FontSize);
 	length += get_Num_Len(month)*FontSize + space;
-	OLED_ShowNum_Left(PosX + length,PosY,day,get_Num_Len(day),FontSize);
+	if(day!=0)
+	{
+		OLED_ShowNum_Left(PosX + length,PosY,day,get_Num_Len(day),FontSize);
+	}
 }
 
 void Dial_ShowTime_FULL(uint8_t PosX,uint8_t PosY,uint8_t hour,uint8_t min,uint8_t sec)
@@ -81,6 +109,195 @@ void Time_Plate(void)
 	
 	Dial_ShowSigner(127-OLED_6X8*5,0);
 }
+
+void set_year(void)
+{
+	OLED_Clear();
+	while(1)
+	{
+		KeyEvent_t xKeyEvent;
+        if(Key_GetEvent(&xKeyEvent, 0) == pdPASS) {		//	从消息队列获取一次按键事件
+            
+			// 按下上键
+			if(xKeyEvent.Up_Pressed) {	
+				MyRTC_Time[0]++;
+			}
+			// 	按下下键
+			if(xKeyEvent.Down_Pressed) {	
+				MyRTC_Time[0]--;
+			}
+			// 按下中间键
+			if(xKeyEvent.Enter_Pressed) {	
+				MyRTC_SetTime();
+				break;
+			}
+		}
+		//OLED_ShowNum_Left(48,24,MyRTC_Time[0],2,OLED_8X16);
+		OLED_ShowNum_Left(48,24,MyRTC_Time[0],4,OLED_8X16);
+		OLED_ShowString_12X12(80,26,"年");
+		Dial_ShowDate(0,47+8,MyRTC_Time[0],MyRTC_Time[1],MyRTC_Time[2],OLED_6X8);
+		OLED_Update();
+	}
+}
+
+void set_month(void)
+{
+	OLED_Clear();
+	while(1)
+	{
+		KeyEvent_t xKeyEvent;
+        if(Key_GetEvent(&xKeyEvent, 0) == pdPASS) {		//	从消息队列获取一次按键事件
+            
+			// 按下上键
+			if(xKeyEvent.Up_Pressed) {	
+				if(MyRTC_Time[1]<12)
+				{
+					MyRTC_Time[1]++;
+				}else
+				{
+					MyRTC_Time[1]=1;
+				}
+			}
+			// 	按下下键
+			if(xKeyEvent.Down_Pressed) {	
+				if(MyRTC_Time[1]>1)
+				{
+					MyRTC_Time[1]--;
+				}else
+				{
+					MyRTC_Time[1]=12;
+				}
+			}
+			// 按下中间键
+			if(xKeyEvent.Enter_Pressed) {	 
+				if(MyRTC_Time[2]>getDaysInMonth(MyRTC_Time[0],MyRTC_Time[1]))
+				{
+					MyRTC_Time[2]=getDaysInMonth(MyRTC_Time[0],MyRTC_Time[1]); //  修改后月份天数大于现在天数，回正
+				}
+				MyRTC_SetTime();
+				break;
+			}
+		}
+		OLED_ShowNum_Left(48,24,MyRTC_Time[1],2,OLED_8X16);
+		OLED_ShowString_12X12(80-2*8,26,"月");
+		Dial_ShowDate(0,47+8,MyRTC_Time[0],MyRTC_Time[1],MyRTC_Time[2],OLED_6X8);
+		OLED_Update();
+	}
+
+}
+
+void set_day(void)
+{
+	OLED_Clear();
+	while(1)
+	{
+		KeyEvent_t xKeyEvent;
+        if(Key_GetEvent(&xKeyEvent, 0) == pdPASS) {		//	从消息队列获取一次按键事件
+            
+			// 按下上键
+			if(xKeyEvent.Up_Pressed) {	
+				MyRTC_Time[2]++;
+				if(MyRTC_Time[2]>getDaysInMonth(MyRTC_Time[0],MyRTC_Time[1]))
+				{
+					MyRTC_Time[2] = 1;
+				}
+			}
+			// 	按下下键
+			if(xKeyEvent.Down_Pressed) {	
+				MyRTC_Time[2]--;
+				if(MyRTC_Time[2]<1)
+				{
+					MyRTC_Time[2] = getDaysInMonth(MyRTC_Time[0],MyRTC_Time[1]);
+				}
+			}
+			// 按下中间键
+			if(xKeyEvent.Enter_Pressed) {	
+				MyRTC_SetTime();
+				break;
+			}
+		}
+		OLED_ShowNum_Left(48,24,MyRTC_Time[2],2,OLED_8X16);
+		OLED_ShowString_12X12(80-2*8,26,"日");
+		Dial_ShowDate(0,47+8,MyRTC_Time[0],MyRTC_Time[1],MyRTC_Time[2],OLED_6X8);
+		OLED_Update();
+	}
+}
+
+void set_hour(void)
+{
+	OLED_Clear();
+	while(1)
+	{
+		KeyEvent_t xKeyEvent;
+        if(Key_GetEvent(&xKeyEvent, 0) == pdPASS) {		//	从消息队列获取一次按键事件
+            
+			// 按下上键
+			if(xKeyEvent.Up_Pressed) {	
+				if(MyRTC_Time[3]==23)
+				{
+					MyRTC_Time[3]=0;
+				}
+				else MyRTC_Time[3]++;
+				
+			}
+			// 	按下下键
+			if(xKeyEvent.Down_Pressed) {	
+				if(MyRTC_Time[3]==0)
+				{
+					MyRTC_Time[3]=23;
+				}
+				else MyRTC_Time[3]--;
+			}
+			// 按下中间键
+			if(xKeyEvent.Enter_Pressed) {	
+				MyRTC_SetTime();
+				break;
+			}
+		}
+		OLED_ShowNum_Left(48,24,MyRTC_Time[3],2,OLED_8X16);
+		OLED_ShowString_12X12(80-2*8,26,"时");
+		Dial_ShowDate(0,47+8,MyRTC_Time[3],MyRTC_Time[4],0,OLED_6X8);
+		OLED_Update();
+	}
+}
+
+void set_min(void)
+{
+	OLED_Clear();
+	while(1)
+	{
+		KeyEvent_t xKeyEvent;
+        if(Key_GetEvent(&xKeyEvent, 0) == pdPASS) {		//	从消息队列获取一次按键事件
+            
+			// 按下上键
+			if(xKeyEvent.Up_Pressed) {	
+				if(MyRTC_Time[4]==59)
+				{
+					MyRTC_Time[4]=0;
+				}
+				else MyRTC_Time[4]++;
+			}
+			// 	按下下键
+			if(xKeyEvent.Down_Pressed) {	
+				if(MyRTC_Time[4]==0)
+				{
+					MyRTC_Time[4]=59;
+				}
+				else MyRTC_Time[4]--;
+			}
+			// 按下中间键
+			if(xKeyEvent.Enter_Pressed) {	
+				MyRTC_SetTime();
+				break;
+			}
+		}
+		OLED_ShowNum_Left(48,24,MyRTC_Time[4],2,OLED_8X16);
+		OLED_ShowString_12X12(80-2*8,26,"分");
+		Dial_ShowDate(0,47+8,MyRTC_Time[3],MyRTC_Time[4],0,OLED_6X8);
+		OLED_Update();
+	}
+}
+
 
 void Time_Plate_Exit(void)
 {
